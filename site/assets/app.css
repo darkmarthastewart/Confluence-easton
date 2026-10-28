@@ -8,7 +8,7 @@ body{background:#120C0A}
 .appbar-actions{display:flex;gap:10px;align-items:center;flex:none}
 .getlisted{font-family:var(--caps);font-weight:800;font-size:11px;letter-spacing:.14em;text-decoration:none;white-space:nowrap;padding:8px 2px}
 .planbtn{white-space:nowrap;background:none;border:2px solid var(--dead-line);border-radius:20px;padding:5px 12px;font-family:var(--caps);font-weight:800;font-size:11px;letter-spacing:.14em;color:var(--soft);cursor:pointer;display:flex;gap:6px;align-items:center}
-.planbtn.lit{border-color:var(--pink-tube);color:var(--pink);box-shadow:0 0 6px var(--pink-glow),inset 0 0 6px var(--pink-glow)}
+.planbtn.lit{border-color:#C8F07A;color:var(--lime);box-shadow:0 0 6px var(--lime-glow),inset 0 0 6px var(--lime-glow)}
 .planbtn .count{font-family:var(--block);font-size:15px;letter-spacing:0}
 @media (max-width:380px){.appbar .wordmark .caps{display:none}}
 
@@ -163,3 +163,10 @@ body{background:#120C0A}
 .welcome .motto{font-family:var(--script);font-size:26px;margin-top:28px}
 .welcome .tube-btn{margin-top:30px;padding:0 34px;min-height:54px;font-size:16px}
 .welcome .foot{margin-top:auto;padding-top:28px;font-weight:600;font-size:13px;letter-spacing:.14em;color:var(--muted)}
+
+/* the research assistant (Martha's dog), drawn in chalk, with opinions */
+.assistant{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;align-items:end;margin-top:30px;background:none;border:0;padding:0;text-align:left;cursor:help;color:var(--ink);width:100%}
+.assistant img{width:120px;height:auto;display:block;opacity:.92}
+.assistant .say{margin-bottom:46px;opacity:0;transform:scale(.5) rotate(6deg);transform-origin:0 100%;transition:opacity .18s,transform .35s cubic-bezier(.3,1.7,.5,1)}
+.assistant .tap{display:block;font-family:var(--caps);font-weight:600;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-top:4px}
+.assistant:hover .say,.assistant:focus-visible .say,.assistant.on .say{opacity:1;transform:none}

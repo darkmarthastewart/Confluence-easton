@@ -35,6 +35,18 @@
     };
   }
   const NOW = eastonNow();
+  // Easton, weirdly: one true and slightly strange fact a day, scribbled in the margin in red marker
+  const WEIRD = [
+    "the farmers' market started in 1752. it's older than the country. the tomatoes have seniority.",
+    "every winter the soldiers' and sailors' monument dresses up as a giant candle. we call it the peace candle. we don't ask questions.",
+    "the declaration of independence got read out loud on the circle in 1776. people have been making announcements here ever since.",
+    "the free bridge is free. the toll bridge upstream is not. choose wisely.",
+    "the road along the river is named for larry holmes, the heavyweight champ from easton. walk it like a champ.",
+    "two rivers meet here and neither one blinks.",
+    "easton sits at the forks of the delaware. the forks are rivers. please do not eat with them."
+  ];
+  const weirdToday = () => WEIRD[Math.floor(ymdDate(NOW.ymd) / 864e5) % WEIRD.length];
+  const MAKERS = '<a class="makers" href="https://marthathinkstoomuch.com" target="_blank" rel="noopener"><span class="hex">DMS</span>made in Easton by Dark Martha Stewart</a>';
   const ymdDate = ymd => { const [y, m, d] = ymd.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d)); };
   const addDays = (ymd, n) => { const d = ymdDate(ymd); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
   const dowOf = ymd => ymdDate(ymd).getUTCDay();
@@ -159,7 +171,7 @@
   /* ---------- rows & cards ---------- */
   function evRow(o) {
     const p = P[o.place];
-    const end = saved.has(o.key) ? '<span class="tag glow-pink">Saved</span>'
+    const end = saved.has(o.key) ? '<span class="tag glow-lime">Saved</span>'
       : o.free ? '<span class="tag glow-teal">FREE</span>' : `<span class="tag">${esc(o.price || '')}</span>`;
     return `<button class="row" type="button" data-ev="${esc(o.key)}">
       <div class="time glow-red">${fmt(o.start).replace(' ', '&nbsp;')}${o.end ? `<small>till ${fmt(o.end)}</small>` : ''}</div>
@@ -213,6 +225,7 @@
     return `${heroSign()}
     <div class="notice">We're just getting started, so you'll see a few <span class="example">Example</span> listings while the real ones come in. Run a business, make things or put on events? <a href="/join/">Get on the map, free</a>.</div>
     <h2 class="title glow-pink">${wear(hello)}</h2><p class="subtitle">${esc(dayLabel(NOW.ymd).replace('Today · ', ''))} · Here's what's on downtown</p>
+    <p class="margin-note"><span class="k">Easton, weirdly</span>${esc(weirdToday())}</p>
     ${mine.length ? `<div class="sec">Your plan</div><div class="list">${mine.map(evRow).join('')}</div>` : ''}
     <div class="enamel board" style="margin-top:20px">
       <div class="board-head glow-yellow">${wear(todays.length ? 'ON TODAY' : 'COMING UP', 3)}</div>
@@ -221,17 +234,19 @@
     <p style="text-align:right;margin:8px 0 0"><a href="#events" class="tag" style="text-decoration:none">See everything →</a></p>
     ${guides.length ? `<div class="sec">Make a day of it <a href="#guides">See all</a></div><div class="hcards">${guides.map(guideCard).join('')}</div>` : ''}
     ${featured ? `<div class="sec">Someone you should know</div>${artistCard(featured, true)}` : ''}
-    ${openNow.length ? `<div class="sec">Open right now <a href="#directory">Around town</a></div><div class="list">${openNow.map(placeRow).join('')}</div>` : ''}`;
+    ${openNow.length ? `<div class="sec">Open right now <a href="#directory">Around town</a></div><div class="list">${openNow.map(placeRow).join('')}</div>` : ''}
+    ${MAKERS}`;
   }
 
   function eventsScreen() {
     const cats = [['all', 'All'], ['music', 'Music'], ['art', 'Art'], ['family', 'Family'], ['food', 'Food'], ['free', 'Free']];
     const list = occurrences.filter(o => S.evCat === 'all' || (S.evCat === 'free' ? o.free : (o.cats || []).includes(S.evCat)));
     const days = [...new Set(list.map(o => o.ymd))];
+    const firstMarket = (list.find(o => o.repeat) || {}).key;
     return `<h2 class="title glow-pink">${wear("What's on")}</h2><p class="subtitle">The next two weeks, from the Circle down to the river</p>
     <div class="chips" role="group" aria-label="Filter events" style="margin-top:14px">${cats.map(([k, l]) => `<button class="chip" type="button" data-evcat="${k}" aria-pressed="${S.evCat === k}">${l}</button>`).join('')}</div>
     ${days.length ? days.map(d => `<div class="day"><span class="rusttag">${esc(dayLabel(d).toUpperCase())}</span></div>
-      <div class="list">${list.filter(o => o.ymd === d).map(o => o.repeat ? marketCard(o) : evRow(o)).join('')}</div>`).join('')
+      <div class="list">${list.filter(o => o.ymd === d).map(o => o.repeat ? marketCard(o) + (o.key === firstMarket ? '<p class="margin-note">older than the country. the tomatoes have seniority.</p>' : '') : evRow(o)).join('')}</div>`).join('')
       : '<p class="empty">Nothing like that on the calendar yet. Try another, or check back soon.</p>'}
     <p class="empty">Putting something on? <a href="/join/#event">Add your event, free</a>.</p>`;
   }
@@ -283,7 +298,11 @@
     const day = guides.filter(g => g.when !== 'night'), night = guides.filter(g => g.when === 'night');
     return `<h2 class="title glow-pink">${wear("Day or night, Easton's yours")}</h2><p class="lede">Plans you can walk, from the first coffee to the last light on the river. Each one maps its own route.</p>
       ${day.length ? `<div class="sec">While the sun's up</div><div class="gridguides">${day.map(guideCard).join('')}</div>` : ''}
-      ${night.length ? `<div class="sec">After dark</div><div class="gridguides">${night.map(guideCard).join('')}</div>` : ''}`;
+      ${night.length ? `<div class="sec">After dark</div><div class="gridguides">${night.map(guideCard).join('')}</div>` : ''}
+      <button class="assistant" type="button" id="assistant" aria-label="The research assistant has an opinion">
+        <img src="/assets/research-assistant.png" alt="" width="120" height="129">
+        <span><span class="say">research assistant's pick: scott park. there are sticks. so many sticks.</span><span class="tap">The research assistant · tap him</span></span>
+      </button>`;
   }
 
   /* ---------- map ---------- */
@@ -499,6 +518,7 @@
     if (t.id === 'closecard') { S.sel = null; return renderMap(); }
     if (t.id === 'backguides') { S.guide = null; return render(); }
     if (t.id === 'planbtn') return planSheet();
+    if (t.id === 'assistant') { t.classList.toggle('on'); return; }
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { if ($('#welcome')) closeWelcome(); else closeSheet(); } });
   document.addEventListener('input', e => {

@@ -72,3 +72,5 @@ Real places (Centre Square, the State Theatre, the Easton Public Market and the 
 ## The look
 
 The app is styled as Easton's old signs after dark: rusted enamel, night brick, and neon tubes that are mostly lit, with a few burned out or flickering. The materials and neon colors live in `site/assets/base.css`; the app's layout is in `site/assets/app.css`. Headlines get their worn tubes from the `wear()` function in `site/assets/app.js`, which picks the letters from the words themselves, so a given word always wears the same way. Flickering stops for anyone whose device asks for reduced motion.
+
+Dark Martha Stewart's kit shows up softly: the ballpoint ink trail (`site/assets/ballpoint.js`, the same one as marthathinkstoomuch.com), one red marker note per screen (the daily "Easton, weirdly" facts live in the `WEIRD` list in `app.js`), her lime for saved things, the research assistant on the Day & Night screen, and a small hexagon maker's mark. Permanent Marker is under the Apache License 2.0.

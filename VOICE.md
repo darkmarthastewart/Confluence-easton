@@ -30,6 +30,14 @@ Most screens are neighbor with one river line at most. If a screen has two river
 - Water imagery stays light: meeting, flowing, current, the water, the Forks. One image per line.
 - Keep it true. The Lehigh does meet the Delaware at Scott Park; nothing else needs dressing up.
 
+## Margin notes (Dark Martha Stewart, spoken softly)
+
+A third voice, used sparingly: the red marker scribble in the margin, in Dark Martha Stewart's hand. One per screen at most.
+
+- Lowercase, dry, a little unhinged, always true. "every winter the soldiers' and sailors' monument dresses up as a giant candle. we call it the peace candle. we don't ask questions."
+- About Easton being Easton, never about a business. No jokes at a listing's expense.
+- The research assistant (the dog) may have opinions. They are about sticks, rivers and naps.
+
 ## Never
 
 - Hype or sales talk: "amazing", "don't miss", "hidden gem", "vibrant", "unique".

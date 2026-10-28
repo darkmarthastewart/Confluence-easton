@@ -4,6 +4,7 @@
 @font-face{font-family:"Bebas Neue";src:url(fonts/bebas-neue-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"League Spartan";src:url(fonts/league-spartan-latin-600-normal.woff2) format("woff2");font-weight:500 600;font-display:swap}
 @font-face{font-family:"League Spartan";src:url(fonts/league-spartan-latin-800-normal.woff2) format("woff2");font-weight:700 800;font-display:swap}
+@font-face{font-family:"Permanent Marker";src:url(fonts/permanent-marker-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-600-normal.woff2) format("woff2");font-weight:500 600;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-700-normal.woff2) format("woff2");font-weight:700 800;font-display:swap}
@@ -18,6 +19,9 @@
   --yellow:#FFE7A0; --yellow-glow:#FF9F1A;
   --red:#FFD0C8; --red-glow:#FF2E3E;
   --teal:#D9FFF9; --teal-glow:#11B3A6;
+  /* Dark Martha Stewart's own kit, spoken softly: her lime, her marker red */
+  --lime:#E4FFB0; --lime-glow:#8DC21F; --marker:#FF3B4E;
+  --f-marker:"Permanent Marker", "Marker Felt", "Comic Sans MS", cursive;
   --script:"Yellowtail", "Brush Script MT", cursive;
   --block:"Bebas Neue", Impact, "Arial Narrow", sans-serif;
   --caps:"League Spartan", "Arial Black", Arial, sans-serif;
@@ -63,6 +67,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .glow-pink{color:var(--pink);text-shadow:0 0 2px #FFF0F5,0 0 7px #FF5C9A,0 0 16px var(--pink-glow),0 0 30px rgba(255,40,120,.55)}
 .glow-yellow{color:var(--yellow);text-shadow:0 0 2px #FFF4CF,0 0 6px #FFC93C,0 0 14px var(--yellow-glow)}
 .glow-red{color:var(--red);text-shadow:0 0 2px #FFE6E1,0 0 6px #FF5A4F,0 0 14px var(--red-glow)}
+.glow-lime{color:var(--lime);text-shadow:0 0 2px #F4FFDC,0 0 6px #B5E35A,0 0 14px var(--lime-glow)}
 .glow-teal{color:var(--teal);text-shadow:0 0 2px #EFFFFC,0 0 6px #3FE0CF,0 0 14px var(--teal-glow)}
 .dead{color:var(--dead)!important;text-shadow:none!important}
 @keyframes flicker{0%,18%,22%,62%,64%,100%{opacity:1}20%,63%{opacity:.25}}
@@ -80,5 +85,15 @@ button,input,select,textarea{font:inherit;color:inherit}
 .wordmark{display:inline-flex;align-items:baseline;gap:8px;text-decoration:none}
 .wordmark .script{font-family:var(--script);font-size:30px;line-height:1}
 .wordmark .caps{font-size:10px;letter-spacing:.3em;color:var(--rust-light)}
+
+/* margin notes in red marker, the way Martha annotates everything */
+.margin-note{display:block;font-family:var(--f-marker);font-size:19px;line-height:1.2;color:var(--marker);transform:rotate(-2.5deg);transform-origin:left center;margin:12px 0 0;max-width:34ch}
+.margin-note .k{display:block;font-family:var(--caps);font-weight:800;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;transform:rotate(2.5deg);margin-bottom:2px}
+/* a speech bubble with Martha's lime offset shadow */
+.say{position:relative;display:inline-block;background:#F4F0E8;color:#111;border:3px solid #111;border-radius:20px 20px 20px 6px;padding:10px 14px;font-family:var(--f-marker);font-size:18px;line-height:1.25;box-shadow:5px 5px 0 var(--lime-glow);max-width:260px}
+/* the maker's mark: a little lime hexagon stamp */
+.makers{display:flex;align-items:center;gap:10px;justify-content:center;margin:34px 0 4px;font-family:var(--caps);font-weight:600;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;text-decoration:none}
+.makers .hex{width:34px;aspect-ratio:.866;flex:none;display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--lime-glow);color:#111;font-family:var(--block);font-size:13px;letter-spacing:.04em}
+.makers:hover{color:var(--soft)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
