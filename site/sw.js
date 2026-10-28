@@ -1,5 +1,5 @@
 // Network first, so listings are always fresh; the saved copy is used only when offline.
-const CACHE = 'confluence-v1';
+const CACHE = 'confluence-v2';
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(clients.claim()));
 self.addEventListener('fetch', e => {

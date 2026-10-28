@@ -57,4 +57,8 @@ Real places (Centre Square, the State Theatre, the Easton Public Market and the 
 ## Notes
 
 - Map tiles come from OpenStreetMap, which is fine for a launch. If the app gets heavy traffic, switch to a tile provider with a free tier (such as MapTiler or Stadia Maps) by changing the one `L.tileLayer` line in `site/assets/app.js`.
-- The map library (Leaflet 1.9.4) and fonts (Young Serif, Figtree, IBM Plex Mono, all under the SIL Open Font License) are stored in the repository, so the site doesn't depend on outside services to load.
+- The map library (Leaflet 1.9.4) and fonts (Bebas Neue, League Spartan and Barlow Condensed under the SIL Open Font License, and Yellowtail under the Apache License 2.0; each license file sits beside the fonts) are stored in the repository, so the site doesn't depend on outside services to load.
+
+## The look
+
+The app is styled as Easton's old signs after dark: rusted enamel, night brick, and neon tubes that are mostly lit, with a few burned out or flickering. The materials and neon colors live in `site/assets/base.css`; the app's layout is in `site/assets/app.css`. Headlines get their worn tubes from the `wear()` function in `site/assets/app.js`, which picks the letters from the words themselves, so a given word always wears the same way. Flickering stops for anyone whose device asks for reduced motion.

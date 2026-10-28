@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Confluence Easton</title>
 <meta name="description" content="Where the city comes together. Events, places, creatives, artists and plans for a day or a night out in downtown Easton, PA.">
-<meta name="theme-color" content="#1D6683">
+<meta name="theme-color" content="#211714">
 <meta property="og:title" content="Confluence Easton">
 <meta property="og:description" content="Where the city comes together: events, places, creatives and artists in downtown Easton, PA.">
 <meta property="og:image" content="https://confluence-easton.netlify.app/og.png">
@@ -14,25 +14,26 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/young-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/yellowtail-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="/assets/base.css">
 <link rel="stylesheet" href="/assets/app.css">
 </head>
 <body>
-<div class="app">
+<div class="app night">
   <header class="appbar">
-    <a class="wordmark" href="#today">Confluence <small>Easton</small></a>
+    <a class="wordmark" href="#today"><span class="script glow-pink">Confluence</span><span class="caps">Easton</span></a>
     <div class="appbar-actions">
-      <a class="getlisted" href="/join/">Get listed</a>
-      <button class="planbtn" id="planbtn" type="button">My plan <span class="count" id="plancount">0</span></button>
+      <a class="getlisted glow-yellow" href="/join/">GET LISTED</a>
+      <button class="planbtn" id="planbtn" type="button">MY PLAN <span class="count" id="plancount">0</span></button>
     </div>
   </header>
-  <main class="screen" id="screen" tabindex="-1"><p class="loading">Loading Easton…</p></main>
+  <main class="screen" id="screen" tabindex="-1"><p class="loading">Lighting up Easton…</p></main>
   <section class="mapview" id="mapview" hidden aria-label="Map of downtown Easton">
     <div class="mapbar" id="mapbar"></div>
     <div class="map" id="map"></div>
-    <div class="mapcard" id="mapcard" hidden></div>
+    <div class="mapcard enamel" id="mapcard" hidden></div>
   </section>
   <nav class="tabs" id="tabs" aria-label="Sections"></nav>
 </div>

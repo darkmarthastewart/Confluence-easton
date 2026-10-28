@@ -5,94 +5,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Get Listed · Confluence Easton</title>
 <meta name="description" content="Two rivers meet here. So does everyone else. Free listings for Easton businesses, creatives, artists and events.">
-<meta name="theme-color" content="#1D6683">
+<meta name="theme-color" content="#211714">
 <meta property="og:title" content="Get listed on Confluence Easton">
 <meta property="og:description" content="A free listing for your Easton business, creative service, art or event.">
 <meta property="og:image" content="https://confluence-easton.netlify.app/og.png">
 <meta property="og:url" content="https://confluence-easton.netlify.app/join/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon-192.png">
-<link rel="preload" href="/assets/fonts/young-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/yellowtail-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bebas-neue-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
-.page{max-width:1120px;margin:0 auto;padding-block:20px 72px;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:env(safe-area-inset-top, 0px)}
-.top a.link{font-weight:600;text-decoration:none}
-.hero{padding:48px 0 24px;max-width:720px}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6.5vw,64px);line-height:1.02;margin:12px 0 16px;text-wrap:balance}
-.hero h1 em{font-style:normal;color:var(--river)}
-.hero p{font-size:18px;margin:0;max-width:60ch}
+.page{max-width:1120px;margin:0 auto;padding-block:calc(18px + env(safe-area-inset-top, 0px)) 72px;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.top .wordmark .script{font-size:34px}
+.top a.link{font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.16em;text-decoration:none}
+.hero{padding:44px 0 20px;max-width:760px}
+.hero .rusted{font-family:var(--block);font-size:clamp(46px,8vw,84px);line-height:.92;margin:14px 0 0;color:var(--rust-light);text-shadow:2px 2px 0 #3A170A;letter-spacing:.01em}
+.hero .lit{font-family:var(--script);font-size:clamp(42px,7vw,72px);line-height:1.05;margin:2px 0 18px}
+.hero p{font-size:20px;margin:0;max-width:58ch;color:var(--ink)}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;align-items:start}
 @media (max-width:900px){.cols{grid-template-columns:minmax(0,1fr);gap:28px}.preview-wrap{order:-1}}
-h2{font-family:var(--display);font-weight:400;font-size:26px;margin:40px 0 14px}
+h2{font-family:var(--caps);font-weight:800;font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--rust-light);margin:44px 0 14px}
 .gets{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (max-width:560px){.gets{grid-template-columns:minmax(0,1fr)}}
-.gets li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
-.gets b{display:block;margin-bottom:2px}
-.gets span{font-size:14px;color:var(--muted)}
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
-.steps li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line);counter-increment:s}
-.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:13px}
-.steps b{display:block}
+.gets li{padding:14px}
+.gets b{display:block;font-weight:700;font-size:18px;text-transform:uppercase;margin-bottom:2px}
+.gets span{font-size:16px;color:var(--soft)}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px;padding:14px 0;border-bottom:1px solid var(--line);counter-increment:s;font-size:17px;color:var(--soft)}
+.steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--pink-tube);color:var(--pink);box-shadow:0 0 8px var(--pink-glow),inset 0 0 6px var(--pink-glow);font-family:var(--block);font-size:19px}
+.steps b{display:block;font-weight:700;font-size:18px;text-transform:uppercase;color:var(--ink)}
 
-form{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:16px;margin-top:8px}
+form{padding:20px;display:grid;gap:18px;margin-top:8px}
 fieldset{border:0;margin:0;padding:0;display:grid;gap:14px;min-width:0}
-legend{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0;margin-bottom:10px}
+legend{font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.2em;color:var(--yellow);text-shadow:0 0 6px #FFC93C;padding:0;margin-bottom:10px;text-transform:uppercase}
 .types{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 @media (max-width:560px){.types{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .types label{position:relative}
 .types input{position:absolute;opacity:0;inset:0}
-.types span{display:block;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 6px;font-weight:600;font-size:14px;cursor:pointer;background:var(--paper)}
-.types input:checked+span{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.types input:focus-visible+span{outline:2px solid var(--crayon);outline-offset:2px}
-.field{display:grid;gap:5px;min-width:0}
-.field label,.field .lbl{font-weight:600;font-size:14px}
-.field small{color:var(--muted);font-size:13px}
-.field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=url],.field input[type=date],.field input[type=time],.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:10px 12px;font-size:16px}
-.field textarea{min-height:96px;resize:vertical}
+.types span{display:grid;place-items:center;min-height:44px;border:2px solid var(--line);font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-align:center;padding:4px}
+.types input:checked+span{border-color:var(--yellow);color:var(--yellow);text-shadow:0 0 6px #FFC93C;box-shadow:0 0 6px var(--yellow-glow),inset 0 0 6px var(--yellow-glow)}
+.types input:focus-visible+span{outline:2px solid var(--yellow);outline-offset:2px}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.field .lbl{font-family:var(--caps);font-weight:800;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.field small{color:var(--muted);font-size:15px}
+.field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=url],.field input[type=date],.field input[type=time],.field select,.field textarea{width:100%;background:#141516;border:2px solid var(--rust-dark);padding:11px 12px;font-size:17px;color:var(--ink)}
+.field input::placeholder,.field textarea::placeholder{color:#857C76}
+.field input[type=file]{font-size:15px;color:var(--soft)}
+.field textarea{min-height:100px;resize:vertical}
 .two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 @media (max-width:560px){.two,.three{grid-template-columns:minmax(0,1fr)}}
-.check{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;font-size:14px}
-.check input{width:18px;height:18px;margin:2px 0 0}
-.private{font-size:13px;color:var(--muted);margin:-6px 0 0}
-.count{font-family:var(--mono);font-size:11px;color:var(--muted);justify-self:end}
+.check{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;font-size:16px}
+.check input{width:20px;height:20px;margin:2px 0 0;accent-color:#FF5C9A}
+.private{font-size:15px;color:var(--soft);margin:-6px 0 0}
+.count{font-family:var(--block);font-size:16px;color:var(--muted);justify-self:end}
 .hp{position:absolute;left:-9999px}
-form .btn{justify-self:start;padding:12px 22px;font-size:16px}
+form .tube-btn{justify-self:start;min-height:56px;padding:0 34px;font-size:15px}
 
 .preview-wrap{position:sticky;top:max(20px, env(safe-area-inset-top, 0px))}
 @media (max-width:900px){.preview-wrap{position:static}}
-.preview{background:var(--paper);border:8px solid var(--ink);border-radius:32px;padding:16px;box-shadow:0 24px 50px -28px rgba(10,30,40,.5)}
-.preview .cap{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.pv-row{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line)}
-.pv-thumb{width:54px;height:54px;border-radius:10px;display:grid;place-items:center;font-family:var(--display);font-size:20px;color:var(--surface);background:var(--brick);overflow:hidden}
-.pv-thumb img{width:100%;height:100%;object-fit:cover}
-.pv-title{font-weight:600;line-height:1.25;overflow-wrap:anywhere}
-.pv-sub{font-size:13px;color:var(--muted)}
-.pv-pill{font-size:12px;font-weight:600;color:var(--open);white-space:nowrap}
-.pv-body h3{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.1;margin:14px 0 4px;overflow-wrap:anywhere}
-.pv-body p{font-size:14px;margin:8px 0;overflow-wrap:anywhere}
-.pv-meta{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:13px}
-.pv-meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+.preview{padding:16px;border-width:4px}
+.preview .cap{font-family:var(--caps);font-weight:800;font-size:10px;letter-spacing:.2em;color:var(--muted);margin-bottom:12px;text-transform:uppercase}
+.pv-row{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:12px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.pv-title{font-weight:700;font-size:18px;line-height:1.15;text-transform:uppercase;overflow-wrap:anywhere}
+.pv-sub{font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.pv-body .pv-name{font-family:var(--script);font-size:38px;line-height:1.05;margin:16px 0 4px;overflow-wrap:anywhere}
+.pv-body p{font-size:17px;margin:8px 0;overflow-wrap:anywhere}
+.pv-meta{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:15px;margin:0}
+.pv-meta dt{font-family:var(--caps);font-weight:800;font-size:10px;letter-spacing:.14em;color:var(--muted);padding-top:3px;text-transform:uppercase}
 .pv-meta dd{margin:0;overflow-wrap:anywhere}
-.preview-note{font-size:13px;color:var(--muted);text-align:center;margin-top:10px}
+.preview-note{font-size:14px;color:var(--muted);text-align:center;margin-top:10px}
 
-.faq{display:grid;gap:0}
-.faq details{border-top:1px solid var(--line);padding:12px 0}
-.faq summary{font-weight:600;cursor:pointer}
-.faq p{margin:8px 0 0;color:var(--muted);max-width:62ch}
+.faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.faq summary{font-weight:700;font-size:18px;text-transform:uppercase;cursor:pointer}
+.faq p{margin:8px 0 0;color:var(--soft);max-width:62ch;font-size:17px}
 </style>
 </head>
-<body>
+<body class="night">
 <div class="page">
   <header class="top">
-    <a class="wordmark" href="/">Confluence <small>Easton</small></a>
-    <a class="link" href="/">See the app →</a>
+    <a class="wordmark" href="/"><span class="script glow-pink">Confluence</span><span class="caps">Easton</span></a>
+    <a class="link glow-yellow" href="/">SEE THE APP →</a>
   </header>
 
   <section class="hero">
-    <div class="eyebrow">For Easton businesses, creatives and artists</div>
-    <h1>Two rivers meet here. <em>So does everyone else.</em></h1>
+    <div class="caps glow-yellow" style="font-size:12px">For Easton businesses, creatives &amp; artists</div>
+    <div class="rusted">TWO RIVERS MEET HERE.</div>
+    <div class="lit glow-pink">So does <span class="flicker">e</span>veryone else.</div>
     <p>Confluence Easton is a new, free guide to downtown, for the folks who live here and the folks just visiting. It puts the events, the map, the shops and restaurants, the creatives and the artists all in one place, with plans for a day or a night out. Your listing is free and takes about five minutes.</p>
   </section>
 
@@ -100,12 +101,12 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
     <div style="min-width:0">
       <h2>What you get</h2>
       <ul class="gets">
-        <li><b>A pin on the downtown map</b><span>Plus one-tap directions, so people can actually find your door.</span></li>
-        <li><b>Live open-now status</b><span>Your hours show open or closed in real time. No more "are they open?" calls.</span></li>
-        <li><b>Your events on the calendar</b><span>Shows, sales, classes, open studios. People save them to their plan and show up.</span></li>
-        <li><b>A spot in Day &amp; Night guides</b><span>Date nights, kids' days and art walks send people from one stop to the next. Yours could be one of them.</span></li>
-        <li><b>Creatives get hired</b><span>Photographers, designers, printers and musicians, listed right where local businesses go looking.</span></li>
-        <li><b>Artists get featured</b><span>Each week an artist gets the home screen, along with where to see or buy the work.</span></li>
+        <li class="enamel"><b>A pin on the downtown map</b><span>Plus one-tap directions, so people can actually find your door.</span></li>
+        <li class="enamel"><b>A live OPEN sign</b><span>Your hours show open or closed in real time. No more "are they open?" calls.</span></li>
+        <li class="enamel"><b>Your events on the calendar</b><span>Shows, sales, classes, open studios. People save them to their plan and show up.</span></li>
+        <li class="enamel"><b>A spot in Day &amp; Night guides</b><span>Date nights, kids' days and art walks send people from one stop to the next. Yours could be one of them.</span></li>
+        <li class="enamel"><b>Creatives get hired</b><span>Photographers, designers, printers and musicians, listed right where local businesses go looking.</span></li>
+        <li class="enamel"><b>Artists get featured</b><span>Each week an artist gets the home screen, along with where to see or buy the work.</span></li>
       </ul>
 
       <h2>How it works</h2>
@@ -116,7 +117,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
       </ol>
 
       <h2 id="form-title">Tell us about you</h2>
-      <form name="listing" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" aria-labelledby="form-title">
+      <form class="enamel" name="listing" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" aria-labelledby="form-title">
         <input type="hidden" name="form-name" value="listing">
         <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
@@ -180,7 +181,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
           <div class="field" data-for="business creative">
             <label for="f-hours">Hours</label>
             <textarea id="f-hours" name="hours" maxlength="300" placeholder="Mon closed&#10;Tue–Thu 11 AM–9 PM&#10;Fri–Sat 11 AM–11 PM&#10;Sun 10 AM–3 PM"></textarea>
-            <small>Write them however's easiest. They're what make the open-now status work.</small>
+            <small>Write them however's easiest. They're what light up your OPEN sign.</small>
           </div>
           <div class="field" data-for="business">
             <label for="f-price">Price range</label>
@@ -222,7 +223,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
           <label class="check"><input type="checkbox" name="consent" value="yes" required id="f-consent"><span>I can speak for this listing, and I agree it can be shown publicly in Confluence Easton.</span></label>
         </fieldset>
 
-        <button class="btn" type="submit">Send my listing</button>
+        <button class="tube-btn" type="submit">Send my listing</button>
       </form>
 
       <h2>Good questions</h2>
@@ -236,15 +237,15 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
     </div>
 
     <aside class="preview-wrap" aria-label="Preview of your listing">
-      <div class="preview">
-        <div class="cap">How your listing will look</div>
+      <div class="preview enamel">
+        <div class="cap">Your listing will look like this</div>
         <div class="pv-row">
-          <div class="pv-thumb" id="pv-thumb">YB</div>
+          <div class="plaque glow-pink" id="pv-thumb">YB</div>
           <div style="min-width:0"><div class="pv-title" id="pv-name">Your business</div><div class="pv-sub" id="pv-sub">Category</div></div>
-          <div class="pv-pill" id="pv-pill">Open now</div>
+          <span class="open-sign" id="pv-pill">OPEN</span>
         </div>
         <div class="pv-body">
-          <h3 id="pv-name2">Your business</h3>
+          <div class="pv-name glow-pink" id="pv-name2">Your business</div>
           <p id="pv-desc">Your description appears here.</p>
           <dl class="pv-meta" id="pv-meta"></dl>
         </div>
@@ -259,10 +260,10 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
   const $ = s => document.querySelector(s);
   const form = document.forms.listing;
   const labels = {
-    business:{name:'Business name', ph:'Your business', addr:'Street address', addrNote:'Puts you on the map.', desc:'Describe your business in a sentence or two', color:'var(--brick)'},
-    creative:{name:'Your name or studio name', ph:'Your studio', addr:'Studio address', addrNote:'Optional. Only if clients can visit you.', desc:'Describe what you do in a sentence or two', color:'var(--plum)'},
-    artist:{name:'Artist name', ph:'Your name', addr:'', addrNote:'', desc:'Tell people about your work in a sentence or two', color:'var(--crayon)'},
-    event:{name:'Event name', ph:'Your event', addr:'Where is it?', addrNote:'Venue name and street address.', desc:'Describe the event in a sentence or two', color:'var(--river)'}
+    business:{name:'Business name', ph:'Your business', addr:'Street address', addrNote:'Puts you on the map.', desc:'Describe your business in a sentence or two', glow:'glow-pink'},
+    creative:{name:'Your name or studio name', ph:'Your studio', addr:'Studio address', addrNote:'Optional. Only if clients can visit you.', desc:'Describe what you do in a sentence or two', glow:'glow-teal'},
+    artist:{name:'Artist name', ph:'Your name', addr:'', addrNote:'', desc:'Tell people about your work in a sentence or two', glow:'glow-yellow'},
+    event:{name:'Event name', ph:'Your event', addr:'Where is it?', addrNote:'Venue name and street address.', desc:'Describe the event in a sentence or two', glow:'glow-red'}
   };
   // which fields are required for each type
   const required = {business:['f-category','f-address'], creative:['f-services'], artist:['f-medium'], event:['f-date','f-start','f-address']};
@@ -276,7 +277,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
     $('#l-name').textContent = L.name;
     $('#l-desc').textContent = L.desc;
     if (L.addr) { $('#l-address').textContent = L.addr; $('#s-address').textContent = L.addrNote; }
-    $('#pv-thumb').style.background = L.color;
+    $('#pv-thumb').className = 'plaque ' + L.glow;
     preview();
   }
   const initials = n => n.replace(/&/g,'').split(/\s+/).filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase();
@@ -287,8 +288,8 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
     const name = v('name') || L.ph;
     $('#pv-name').textContent = name; $('#pv-name2').textContent = name;
     if (!$('#pv-thumb').querySelector('img')) $('#pv-thumb').textContent = initials(name) || '?';
-    let sub = '', pill = '', meta = [];
-    if (t==='business'){ sub = [v('category')||'Category', v('price')].filter(Boolean).join(' · '); pill = v('hours') ? 'Open now' : '';
+    let sub = '', sign = '', meta = [];
+    if (t==='business'){ sub = [v('category')||'Category', v('price')].filter(Boolean).join(' · '); sign = 'OPEN';
       if (v('address')) meta.push(['Address', v('address')]); if (v('hours')) meta.push(['Hours', v('hours')]); }
     if (t==='creative'){ sub = v('services') ? v('services').split(',').map(s=>s.trim()).filter(Boolean).join(' · ') : 'What you offer';
       if (v('rate')) meta.push(['Rates', v('rate')]); if (v('address')) meta.push(['Studio', v('address')]); }
@@ -296,11 +297,12 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
     if (t==='event'){ const d = v('event_date'); let when = '';
       if (d){ const dt = new Date(d+'T12:00:00'); when = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}); }
       if (v('event_start')) when += (when?' · ':'') + fmtTime(v('event_start')) + (v('event_end')?'–'+fmtTime(v('event_end')):'');
-      sub = v('address') || 'Venue'; pill = v('event_cost') || '';
+      sub = v('address') || 'Venue'; sign = v('event_cost') ? v('event_cost').toUpperCase() : '';
       if (when) meta.push(['When', when]); if (v('event_repeat')) meta.push(['Repeats', v('event_repeat')]); if (v('address')) meta.push(['Where', v('address')]); }
     if (v('website')) meta.push(['Web', v('website')]);
     if (v('public_phone') && (t==='business'||t==='creative')) meta.push(['Phone', v('public_phone')]);
-    $('#pv-sub').textContent = sub; $('#pv-pill').textContent = pill;
+    $('#pv-sub').textContent = sub;
+    const pill = $('#pv-pill'); pill.textContent = sign; pill.hidden = !sign;
     $('#pv-desc').textContent = v('description') || 'Your description appears here.';
     $('#pv-meta').innerHTML = meta.map(([k,val]) => `<dt>${esc(k)}</dt><dd>${esc(val).replace(/\n/g,'<br>')}</dd>`).join('');
     $('#desc-count').textContent = `${v('description').length} / 280`;
