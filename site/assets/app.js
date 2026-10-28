@@ -151,8 +151,8 @@
   let heroPhoto = null;
   function heroSign() {
     const script = `<div class="hero-script glow-pink" aria-hidden="true">Confluence</div>`;
-    if (heroPhoto) return `<figure class="hero has-photo"><img src="${esc(heroPhoto.src)}" alt="${esc(heroPhoto.alt || 'A sign in downtown Easton')}">${script}
-      ${heroPhoto.credit ? `<figcaption>${esc(heroPhoto.credit)}</figcaption>` : ''}</figure>`;
+    if (heroPhoto) return `<figure class="hero has-photo" style="margin-bottom:0"><div class="photo"><img src="${esc(heroPhoto.src)}" alt="${esc(heroPhoto.alt || 'A sign in downtown Easton')}">
+      ${heroPhoto.credit ? `<figcaption>${esc(heroPhoto.credit)}</figcaption>` : ''}</div>${script}</figure>`;
     return `<div class="hero">${script}<div class="hero-place caps">Easton · Pennsylvania</div></div>`;
   }
 

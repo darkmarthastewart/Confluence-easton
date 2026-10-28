@@ -1,5 +1,9 @@
 {
   "showExamples": true,
   "joinPath": "/join/",
-  "heroPhoto": {"src": "", "alt": "", "credit": ""}
+  "heroPhoto": {
+    "src": "/photos/hotel-easton.jpg",
+    "alt": "The old Hotel Easton sign, rusted letters and empty neon tubes, leaning against a whitewashed brick wall",
+    "credit": ""
+  }
 }
