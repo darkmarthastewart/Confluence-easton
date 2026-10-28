@@ -1,0 +1,21 @@
+[
+  {"id":"farmers-sat","title":"Easton Farmers' Market","place":"centre-square","cats":["food","family"],"free":true,
+   "repeat":{"weekdays":["sat"],"months":[5,6,7,8,9,10,11],"start":"09:00","end":"13:00"},
+   "desc":"The country's oldest continuous open-air market, running since 1752. Produce, baked goods, flowers and more from regional growers."},
+  {"id":"farmers-wed","title":"Easton Farmers' Market (Wednesday)","place":"centre-square","cats":["food","family"],"free":true,
+   "repeat":{"weekdays":["wed"],"months":[6,7,8,9],"start":"16:00","end":"20:00"},
+   "desc":"The midweek evening market on the square, June through September."},
+
+  {"id":"x1","example":true,"title":"After-work vinyl set","place":"records","cats":["music"],"free":true,"inDays":0,"start":"18:00","end":"20:00","desc":"A local DJ spins soul and funk 45s."},
+  {"id":"x2","example":true,"title":"Trivia night","place":"gaslight","cats":["food"],"free":true,"inDays":0,"start":"19:00","end":"21:00","desc":"Teams of up to six. Winners get a bottle for the table."},
+  {"id":"x3","example":true,"title":"Comedy night","place":"state","cats":["music"],"free":false,"price":"$28–$45","inDays":0,"start":"20:00","end":"22:00","desc":"A touring stand-up headliner with a local opener."},
+  {"id":"x4","example":true,"title":"Toddler story time","place":"library","cats":["family"],"free":true,"inDays":1,"start":"10:30","end":"11:15","desc":"Picture books, songs and a craft. Ages 1–4 with a grown-up."},
+  {"id":"x5","example":true,"title":"Open studio: print a tote","place":"halftone","cats":["art"],"free":false,"price":"$15","inDays":1,"start":"18:00","end":"21:00","desc":"Pull your own two-color print on a tote bag."},
+  {"id":"x6","example":true,"title":"Jazz trio","place":"lowbridge","cats":["music"],"free":true,"inDays":1,"start":"20:00","end":"23:00","desc":"Standards and originals. No cover."},
+  {"id":"x7","example":true,"title":"Art after dark walk","place":"centre-square","cats":["art"],"free":true,"inDays":2,"start":"17:00","end":"20:00","desc":"Galleries and studios stay open late. Pick up a walking map at the square."},
+  {"id":"x8","example":true,"title":"Pasta-making class","place":"marigold","cats":["food"],"free":false,"price":"$65","inDays":2,"start":"18:30","end":"20:30","desc":"Make two shapes by hand and eat them."},
+  {"id":"x9","example":true,"title":"Kids' craft morning","place":"kite","cats":["family"],"free":true,"inDays":3,"start":"10:00","end":"12:00","desc":"Drop-in crafts at the play table."},
+  {"id":"x10","example":true,"title":"Riverfront concert","place":"scott-park","cats":["music","family"],"free":true,"inDays":3,"start":"18:00","end":"20:00","desc":"Bring a blanket."},
+  {"id":"x11","example":true,"title":"Trail cleanup","place":"stirner","cats":["family"],"free":true,"inDays":4,"start":"10:00","end":"12:00","desc":"Gloves and bags provided. Meet at the trail sign."},
+  {"id":"x12","example":true,"title":"Ceramics sale","place":"northside","cats":["art"],"free":true,"inDays":5,"start":"11:00","end":"16:00","desc":"Seconds and new planters, priced to go."}
+]

@@ -1,0 +1,44 @@
+/* Confluence Easton: shared tokens, fonts and basics for every page */
+@font-face{font-family:"Young Serif";src:url(fonts/young-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Figtree";src:url(fonts/figtree-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Figtree";src:url(fonts/figtree-latin-600-normal.woff2) format("woff2");font-weight:500 600;font-display:swap}
+@font-face{font-family:"Figtree";src:url(fonts/figtree-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+
+:root{
+  --paper:#EEF2F0; --surface:#FFFFFF; --sunk:#E3E9E7; --line:#CBD6D3;
+  --ink:#13232B; --muted:#55666D;
+  --river:#1D6683; --river-soft:#D3E6EE; --water:#B9D7E3;
+  --crayon:#E5A91A; --brick:#A9362B; --moss:#3D7A4A; --plum:#6B4A8C;
+  --open:#2F7A44; --closed:#9A4136;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --paper:#0D1619; --surface:#16232A; --sunk:#1D2D35; --line:#2C3F48;
+  --ink:#E4ECEE; --muted:#9AAEB5;
+  --river:#71B9D4; --river-soft:#1B3A47; --water:#1C3D4B;
+  --crayon:#F0BC3E; --brick:#E07A6B; --moss:#7FBF8C; --plum:#B79BD6;
+  --open:#7FCB93; --closed:#E58C7E; color-scheme:dark;
+}}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:var(--river)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--crayon);outline-offset:2px}
+
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--river)}
+.wordmark{font-family:var(--display);font-size:24px;line-height:1;display:inline-flex;align-items:baseline;gap:6px;color:var(--ink);text-decoration:none}
+.wordmark small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:10px;padding:10px 16px;font:600 15px var(--body);cursor:pointer;background:var(--river);color:var(--surface);text-decoration:none}
+.btn.ghost{background:var(--sunk);color:var(--ink)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.example{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px dashed var(--muted);color:var(--muted);border-radius:4px;padding:1px 6px;vertical-align:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

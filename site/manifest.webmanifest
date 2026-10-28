@@ -1,0 +1,14 @@
+{
+  "name": "Confluence Easton",
+  "short_name": "Confluence",
+  "description": "Events, places, creatives and artists in downtown Easton, PA.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EEF2F0",
+  "theme_color": "#1D6683",
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
