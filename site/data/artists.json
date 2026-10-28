@@ -1,14 +1,8 @@
 [
-  {"id":"okafor","example":true,"featured":true,"name":"Dana Okafor","medium":"Murals & large-scale painting","colors":["#E5A91A","#A9362B","#1D6683"],
-   "see":"Ferry Street wall, behind 2nd St","bio":"Paints big, bright walls about the two rivers, and runs a teen mural workshop each summer."},
-  {"id":"ferreira","example":true,"name":"Luis Ferreira","medium":"Ceramics","colors":["#C9B79C","#5A6B5E","#8B5A3C"],
-   "see":"Northside Plants carries the planters","bio":"Wheel-thrown stoneware glazed in river-mud browns and greens. Takes custom tableware orders for restaurants."},
-  {"id":"whitcomb","example":true,"name":"Mae Whitcomb","medium":"Printmaking","colors":["#13232B","#E8E1D2","#A9362B"],
-   "see":"Halftone Print Studio, Thursday open studio","bio":"Linocut prints of Easton rowhouses and storefronts, in small editions."},
-  {"id":"reyes","example":true,"name":"Tomas Reyes","medium":"Jazz guitar","colors":["#3A2A55","#E5A91A","#1B2F4A"],
-   "see":"Low Bridge Cocktail Room, Thursday nights","bio":"A trio leader who plays standards and originals around downtown most weeks."},
-  {"id":"park","example":true,"name":"June Park","medium":"Photography","colors":["#2F3E46","#84A98C","#CAD2C5"],
-   "see":"Canal Lock Coffee","bio":"Black-and-white street photography of the Saturday market and the people who work it."},
-  {"id":"lindqvist","example":true,"name":"Ari Lindqvist","medium":"Sculpture","colors":["#6E7E85","#B7472A","#D9D2C5"],
-   "see":"Karl Stirner Arts Trail","bio":"Steel and found-object sculpture, with a piece installed along the Bushkill Creek trail."}
+  {"id": "okafor", "example": true, "featured": true, "name": "Dana Okafor", "medium": "Murals & large-scale painting", "colors": ["#E5A91A", "#A9362B", "#1D6683"], "see": "Ferry Street wall, behind 2nd St", "bio": "Paints big, bright walls about the two rivers, and runs a mural workshop for teens every summer."},
+  {"id": "ferreira", "example": true, "name": "Luis Ferreira", "medium": "Ceramics", "colors": ["#C9B79C", "#5A6B5E", "#8B5A3C"], "see": "Northside Plants carries the planters", "bio": "Stoneware thrown on the wheel and glazed in river-mud browns and greens. Takes custom orders for restaurants."},
+  {"id": "whitcomb", "example": true, "name": "Mae Whitcomb", "medium": "Printmaking", "colors": ["#13232B", "#E8E1D2", "#A9362B"], "see": "Halftone Print Studio, Thursday open studio", "bio": "Linocuts of Easton's rowhouses and storefronts, printed in small editions."},
+  {"id": "reyes", "example": true, "name": "Tomas Reyes", "medium": "Jazz guitar", "colors": ["#3A2A55", "#E5A91A", "#1B2F4A"], "see": "Low Bridge Cocktail Room, Thursday nights", "bio": "Leads a trio playing standards and originals around downtown most weeks."},
+  {"id": "park", "example": true, "name": "June Park", "medium": "Photography", "colors": ["#2F3E46", "#84A98C", "#CAD2C5"], "see": "Canal Lock Coffee", "bio": "Black-and-white photos of the Saturday market and the people who work it."},
+  {"id": "lindqvist", "example": true, "name": "Ari Lindqvist", "medium": "Sculpture", "colors": ["#6E7E85", "#B7472A", "#D9D2C5"], "see": "Karl Stirner Arts Trail", "bio": "Steel and found-object sculpture, including a piece along the Bushkill Creek trail."}
 ]

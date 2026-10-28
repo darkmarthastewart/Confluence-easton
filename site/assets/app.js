@@ -159,37 +159,37 @@
       <div><div class="k">${g.when === 'night' ? 'Night' : 'Day'} · ${esc(g.who)}</div><div class="t">${esc(g.title)}</div></div>
       <div class="m">${g.stops.length} stops · ${esc(g.time)}</div></button>`;
   const artistCard = (a, feature) => `<button class="artist" type="button" data-artist="${esc(a.id)}">${artistArt(a)}
-      <div style="min-width:0">${feature ? '<div class="label">Featured local artist</div>' : ''}
+      <div style="min-width:0">${feature ? '<div class="label">Featured artist</div>' : ''}
       <div class="who">${esc(a.name)}${exTag(a)}</div><div class="med">${esc(a.medium)}</div>${feature ? `<p>${esc(a.bio)}</p>` : ''}</div></button>`;
 
   /* ---------- screens ---------- */
   function today() {
     const h = Math.floor(NOW.min / 60);
-    const hello = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+    const hello = h < 5 ? 'Still up, Easton?' : h < 12 ? 'Morning, Easton.' : h < 17 ? 'Afternoon, Easton.' : h < 22 ? 'Evening, Easton.' : 'Still up, Easton?';
     const todays = occurrences.filter(o => o.ymd === NOW.ymd);
     const upcoming = todays.length ? todays : occurrences.slice(0, 4);
     const mine = occurrences.filter(o => saved.has(o.key));
     const openFood = places.filter(p => p.type === 'food' && openState(p)?.open).slice(0, 4);
     const featured = artists.find(a => a.featured) || artists[0];
     return `
-    <div class="notice"><div>Confluence Easton is in early preview. Listings marked <span class="example">Example</span> are samples. <a href="/join/">Get your business, service or art listed free</a>.</div></div>
-    <h2 class="title">${hello}, Easton.</h2><p class="subtitle">${dayLabel(NOW.ymd).replace('Today · ', '')}</p>
+    <div class="notice"><div>We're just getting started, so you'll see a few <span class="example">Example</span> listings while the real ones come in. Run a business, make things or put on events? <a href="/join/">Get on the map, free</a>.</div></div>
+    <h2 class="title">${hello}</h2><p class="subtitle">${dayLabel(NOW.ymd).replace('Today · ', '')} · Here's what's on downtown.</p>
     ${mine.length ? `<h3 class="sec">Your plan</h3><div class="list">${mine.map(evRow).join('')}</div>` : ''}
-    <h3 class="sec">${todays.length ? 'Happening today' : 'Coming up'} <a href="#events">All events</a></h3>
-    <div class="list">${upcoming.length ? upcoming.map(evRow).join('') : '<p class="empty">No events listed yet this week.</p>'}</div>
-    ${guides.length ? `<h3 class="sec">Plan a day or night <a href="#guides">See all</a></h3><div class="hcards">${guides.map(guideCard).join('')}</div>` : ''}
-    ${featured ? `<h3 class="sec">Meet a local artist</h3>${artistCard(featured, true)}` : ''}
-    ${openFood.length ? `<h3 class="sec">Open now <a href="#directory">Directory</a></h3><div class="list">${openFood.map(placeRow).join('')}</div>` : ''}`;
+    <h3 class="sec">${todays.length ? 'On today' : 'Coming up'} <a href="#events">See everything</a></h3>
+    <div class="list">${upcoming.length ? upcoming.map(evRow).join('') : '<p class="empty">Quiet week on the calendar so far. Wander anyway; downtown has a way of surprising you.</p>'}</div>
+    ${guides.length ? `<h3 class="sec">Make a day of it <a href="#guides">See all</a></h3><div class="hcards">${guides.map(guideCard).join('')}</div>` : ''}
+    ${featured ? `<h3 class="sec">Someone you should know</h3>${artistCard(featured, true)}` : ''}
+    ${openFood.length ? `<h3 class="sec">Open right now <a href="#directory">Directory</a></h3><div class="list">${openFood.map(placeRow).join('')}</div>` : ''}`;
   }
 
   function eventsScreen() {
     const cats = [['all', 'All'], ['music', 'Music'], ['art', 'Art'], ['family', 'Family'], ['food', 'Food'], ['free', 'Free']];
     const list = occurrences.filter(o => S.evCat === 'all' || (S.evCat === 'free' ? o.free : (o.cats || []).includes(S.evCat)));
     const days = [...new Set(list.map(o => o.ymd))];
-    return `<h2 class="title">Events</h2><p class="subtitle">The next two weeks downtown.</p>
+    return `<h2 class="title">What's on</h2><p class="subtitle">The next two weeks, from the Circle down to the river.</p>
     <div class="chips" role="group" aria-label="Filter events" style="margin-top:10px">${cats.map(([k, l]) => `<button class="chip" type="button" data-evcat="${k}" aria-pressed="${S.evCat === k}">${l}</button>`).join('')}</div>
-    ${days.length ? days.map(d => `<div class="day">${dayLabel(d)}</div><div class="list">${list.filter(o => o.ymd === d).map(evRow).join('')}</div>`).join('') : '<p class="empty">Nothing in that category in the next two weeks.</p>'}
-    <p class="empty">Hosting something downtown? <a href="/join/#event">Add your event</a>.</p>`;
+    ${days.length ? days.map(d => `<div class="day">${dayLabel(d)}</div><div class="list">${list.filter(o => o.ymd === d).map(evRow).join('')}</div>`).join('') : '<p class="empty">Nothing like that on the calendar yet. Try another, or check back soon.</p>'}
+    <p class="empty">Putting something on? <a href="/join/#event">Add your event, free</a>.</p>`;
   }
 
   function directory() {
@@ -204,20 +204,20 @@
         (S.dirCat === 'all' || (S.dirCat === 'open' ? openState(p)?.open : S.dirCat === 'landmark' ? (p.type === 'landmark' || p.type === 'outdoors') : p.type === S.dirCat)) &&
         match(p.name, p.sub, p.blurb));
       body = `<div class="chips">${cats.map(([k, l]) => `<button class="chip" type="button" data-dircat="${k}" aria-pressed="${S.dirCat === k}">${l}</button>`).join('')}</div>
-        <div class="list">${list.length ? list.map(placeRow).join('') : '<p class="empty">No matches. Try a different word.</p>'}</div>`;
+        <div class="list">${list.length ? list.map(placeRow).join('') : '<p class="empty">Nobody by that name yet. Try another word.</p>'}</div>`;
     } else if (S.seg === 'creatives') {
       const list = places.filter(p => p.type === 'creative' && match(p.name, p.sub, p.blurb, (p.tags || []).join(' ')));
-      body = `<p class="subtitle" style="margin:0 0 6px;font-size:14px">Local people to hire for photos, design, printing, music and events.</p>
-        <div class="list">${list.length ? list.map(placeRow).join('') : '<p class="empty">No matches. Try a different word.</p>'}</div>`;
+      body = `<p class="subtitle" style="margin:0 0 6px;font-size:14px">The photographers, designers, printers and players who make Easton look and sound like Easton. Hire local.</p>
+        <div class="list">${list.length ? list.map(placeRow).join('') : '<p class="empty">Nobody by that name yet. Try another word.</p>'}</div>`;
     } else {
       const list = artists.filter(a => match(a.name, a.medium, a.bio));
-      body = `<div class="stack">${list.length ? list.map(a => artistCard(a, false)).join('') : '<p class="empty">No matches.</p>'}</div>`;
+      body = `<div class="stack">${list.length ? list.map(a => artistCard(a, false)).join('') : '<p class="empty">Nobody by that name yet. Try another word.</p>'}</div>`;
     }
-    return `<h2 class="title">Directory</h2>
+    return `<h2 class="title">Around town</h2>
       <div class="seg" role="group" aria-label="Directory section">${segs.map(([k, l]) => `<button type="button" data-seg="${k}" aria-pressed="${S.seg === k}">${l}</button>`).join('')}</div>
       <input class="search" id="dirsearch" type="search" placeholder="${ph}" value="${esc(S.q)}" aria-label="${ph}">
       ${body}
-      <p class="empty">Not listed yet? <a href="/join/">Add a listing free</a>.</p>`;
+      <p class="empty">Someone missing? <a href="/join/">Add a listing, free</a>, or send them the link.</p>`;
   }
 
   function guidesScreen() {
@@ -230,12 +230,12 @@
       <ol class="timeline">${g.stops.map((s, i) => { const p = P[s.place]; return `<li>
         <div class="time">${fmt(s.at)}</div><div class="n">${i + 1}</div>
         <div style="min-width:0"><button class="stop" type="button" data-place="${esc(p.id)}">${esc(p.name)}</button><p>${esc(s.note)}</p></div></li>`; }).join('')}</ol>
-      <button class="btn" type="button" data-route="${esc(g.id)}">Show route on map</button>`;
+      <button class="btn" type="button" data-route="${esc(g.id)}">Show the route</button>`;
     }
     const day = guides.filter(g => g.when !== 'night'), night = guides.filter(g => g.when === 'night');
-    return `<h2 class="title">A day or a night in Easton</h2><p class="subtitle">Ready-made walkable plans, each with its route on the map.</p>
-      ${day.length ? `<h3 class="sec">By day</h3><div class="gridguides">${day.map(guideCard).join('')}</div>` : ''}
-      ${night.length ? `<h3 class="sec">By night</h3><div class="gridguides">${night.map(guideCard).join('')}</div>` : ''}`;
+    return `<h2 class="title">Day or night, Easton's yours</h2><p class="subtitle">Plans you can walk, from the first coffee to the last light on the river. Each one maps its own route.</p>
+      ${day.length ? `<h3 class="sec">While the sun's up</h3><div class="gridguides">${day.map(guideCard).join('')}</div>` : ''}
+      ${night.length ? `<h3 class="sec">After dark</h3><div class="gridguides">${night.map(guideCard).join('')}</div>` : ''}`;
   }
 
   /* ---------- map ---------- */
@@ -339,7 +339,7 @@
   function planSheet() {
     const mine = occurrences.filter(o => saved.has(o.key));
     sheet(`<h2>My plan</h2>${mine.length ? mine.map(o => `<div class="day">${dayLabel(o.ymd)}</div><div class="list">${evRow(o)}</div>`).join('')
-      : '<p class="empty">Nothing saved yet. Open any event and tap “Add to my plan”. Saved events stay on this device.</p>'}`);
+      : '<p class="empty">Nothing saved yet. Tap any event, then “Add to my plan,” and it’ll wait for you here. Your plan stays on this phone.</p>'}`);
   }
 
   /* ---------- render & routing ---------- */
@@ -419,7 +419,7 @@
     occurrences = expandEvents(14);
     if (location.hash) fromHash(); else render();
   }).catch(() => {
-    $('#screen').innerHTML = '<p class="empty">Easton\'s listings didn\'t load. Check your connection and reload the page.</p>';
+    $('#screen').innerHTML = '<p class="empty">We couldn\'t load Easton just now. Check your connection and try again.</p>';
   });
 
   if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));

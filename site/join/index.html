@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Get Listed · Confluence Easton</title>
-<meta name="description" content="Free listings for downtown Easton businesses, creative services, artists and events.">
+<meta name="description" content="Two rivers meet here. So does everyone else. Free listings for Easton businesses, creatives, artists and events.">
 <meta name="theme-color" content="#1D6683">
 <meta property="og:title" content="Get listed on Confluence Easton">
 <meta property="og:description" content="A free listing for your Easton business, creative service, art or event.">
@@ -92,30 +92,30 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
 
   <section class="hero">
     <div class="eyebrow">For Easton businesses, creatives and artists</div>
-    <h1>Put yourself on <em>Easton's map.</em> Free.</h1>
-    <p>Confluence Easton is a new, free guide to downtown Easton, built for residents and visitors. It brings together events, a map of downtown, local businesses, creative services, artists, and ready-made plans for a day or a night out. A listing costs nothing and takes about five minutes.</p>
+    <h1>Two rivers meet here. <em>So does everyone else.</em></h1>
+    <p>Confluence Easton is a new, free guide to downtown, for the folks who live here and the folks just visiting. It puts the events, the map, the shops and restaurants, the creatives and the artists all in one place, with plans for a day or a night out. Your listing is free and takes about five minutes.</p>
   </section>
 
   <div class="cols">
     <div style="min-width:0">
-      <h2>What a listing gets you</h2>
+      <h2>What you get</h2>
       <ul class="gets">
-        <li><b>A pin on the downtown map</b><span>With one-tap directions in Google Maps or Apple Maps.</span></li>
-        <li><b>Live open-now status</b><span>Your hours show as open or closed in real time.</span></li>
-        <li><b>Your events on the calendar</b><span>Add a show, sale, class or open studio, and people can save it to their plan.</span></li>
-        <li><b>A spot in Day &amp; Night guides</b><span>Date nights, kids' days and art walks send people from one stop to the next.</span></li>
-        <li><b>Creatives get hired</b><span>Photographers, designers, printers and musicians are listed where local businesses look.</span></li>
-        <li><b>Artists get featured</b><span>A featured artist appears on the app's home screen, with where to see or buy the work.</span></li>
+        <li><b>A pin on the downtown map</b><span>Plus one-tap directions, so people can actually find your door.</span></li>
+        <li><b>Live open-now status</b><span>Your hours show open or closed in real time. No more "are they open?" calls.</span></li>
+        <li><b>Your events on the calendar</b><span>Shows, sales, classes, open studios. People save them to their plan and show up.</span></li>
+        <li><b>A spot in Day &amp; Night guides</b><span>Date nights, kids' days and art walks send people from one stop to the next. Yours could be one of them.</span></li>
+        <li><b>Creatives get hired</b><span>Photographers, designers, printers and musicians, listed right where local businesses go looking.</span></li>
+        <li><b>Artists get featured</b><span>Each week an artist gets the home screen, along with where to see or buy the work.</span></li>
       </ul>
 
       <h2>How it works</h2>
       <ol class="steps">
-        <li><div><b>Send your details</b>Fill out the form below. Add a photo if you have one.</div></li>
-        <li><div><b>We check it</b>Every listing is reviewed by a person before it goes live, usually within a few days.</div></li>
-        <li><div><b>You're on the map</b>Your listing appears in the app. To change it later, send the form again with the same name.</div></li>
+        <li><div><b>Tell us about you</b>Fill out the form below. Add a photo if you have a good one.</div></li>
+        <li><div><b>A person reads it</b>Not a bot. We check every listing before it goes live, usually within a few days.</div></li>
+        <li><div><b>You're on the map</b>Your listing shows up in the app. Something changes? Send the form again with the same name.</div></li>
       </ol>
 
-      <h2 id="form-title">Your listing</h2>
+      <h2 id="form-title">Tell us about you</h2>
       <form name="listing" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" aria-labelledby="form-title">
         <input type="hidden" name="form-name" value="listing">
         <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
@@ -131,7 +131,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
         </fieldset>
 
         <fieldset>
-          <legend>Shown in the app</legend>
+          <legend>What people will see</legend>
           <div class="field">
             <label for="f-name" id="l-name">Business name</label>
             <input type="text" id="f-name" name="name" required maxlength="80" autocomplete="organization">
@@ -180,7 +180,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
           <div class="field" data-for="business creative">
             <label for="f-hours">Hours</label>
             <textarea id="f-hours" name="hours" maxlength="300" placeholder="Mon closed&#10;Tue–Thu 11 AM–9 PM&#10;Fri–Sat 11 AM–11 PM&#10;Sun 10 AM–3 PM"></textarea>
-            <small>Write them however is easiest. They power the open-now status.</small>
+            <small>Write them however's easiest. They're what make the open-now status work.</small>
           </div>
           <div class="field" data-for="business">
             <label for="f-price">Price range</label>
@@ -206,14 +206,14 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
           <div class="field">
             <label for="f-photo">Photo</label>
             <input type="file" id="f-photo" name="photo" accept="image/*">
-            <small>Optional. A storefront, your work or a portrait. Under 8 MB.</small>
+            <small>Optional. Your storefront, your work or your face. Under 8 MB.</small>
           </div>
           <label class="check" data-for="artist"><input type="checkbox" name="featured_interest" value="yes" id="f-feature"><span>I'd like to be considered as a featured artist on the home screen.</span></label>
         </fieldset>
 
         <fieldset>
           <legend>Just for us</legend>
-          <p class="private">We use these only to confirm your listing. They are never shown in the app.</p>
+          <p class="private">We only use these to check in with you. They never show up in the app.</p>
           <div class="two">
             <div class="field"><label for="f-cname">Your name</label><input type="text" id="f-cname" name="contact_name" required maxlength="80" autocomplete="name"></div>
             <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" name="contact_email" required maxlength="120" autocomplete="email"></div>
@@ -225,13 +225,13 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
         <button class="btn" type="submit">Send my listing</button>
       </form>
 
-      <h2>Questions</h2>
+      <h2>Good questions</h2>
       <div class="faq">
-        <details><summary>Does it cost anything?</summary><p>No. Listings are free, and there are no paid placements. Guides and featured artists are chosen for what makes a good day in Easton, not for payment.</p></details>
-        <details><summary>Who is behind Confluence Easton?</summary><p>It's an independent project built in Easton to make downtown easier to explore, for people who live here and people visiting.</p></details>
-        <details><summary>How do I change my listing later?</summary><p>Send this form again with the same name and what changed. We'll update it.</p></details>
-        <details><summary>What are the "Example" listings in the app?</summary><p>The app is in early preview. Example listings show how things will look, and they're replaced as real listings come in.</p></details>
-        <details><summary>Who sees my email and phone?</summary><p>Only the person who reviews listings. They're used to confirm details with you and are never published.</p></details>
+        <details><summary>Does it cost anything?</summary><p>No. Listings are free, and nobody can pay to be featured. Guides and featured artists are picked for what makes a good day in Easton, and that's it.</p></details>
+        <details><summary>Who is behind Confluence Easton?</summary><p>Neighbors. It's an independent project built here in Easton, to make downtown easier to explore for the people who live here and the people passing through.</p></details>
+        <details><summary>How do I change my listing later?</summary><p>Send this form again with the same name and tell us what changed. We'll take care of it.</p></details>
+        <details><summary>What are the "Example" listings in the app?</summary><p>We're just getting started. The examples show how things will look, and they step aside as real listings come in.</p></details>
+        <details><summary>Who sees my email and phone?</summary><p>Only the person who reviews listings. We use them to check details with you, and they're never published.</p></details>
       </div>
     </div>
 
@@ -249,7 +249,7 @@ form .btn{justify-self:start;padding:12px 22px;font-size:16px}
           <dl class="pv-meta" id="pv-meta"></dl>
         </div>
       </div>
-      <p class="preview-note">The preview updates as you type.</p>
+      <p class="preview-note">This updates as you type.</p>
     </aside>
   </div>
 </div>
