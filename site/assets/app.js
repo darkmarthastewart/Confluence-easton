@@ -146,30 +146,15 @@
   const artistArt = a => a.photo ? `<img class="art" src="${esc(a.photo)}" alt="" style="object-fit:cover">` : artSVG(a.colors || ['#1D6683', '#E5A91A', '#13232B'], a.name.length * 97);
 
   /* ---------- the big sign ---------- */
-  const BIG_SIGN = `<div class="bigsign">
-    <span class="streak" style="left:13%;top:150px;height:56px"></span><span class="streak" style="left:30%;top:152px;height:34px"></span><span class="streak" style="left:58%;top:150px;height:66px"></span><span class="streak" style="left:89%;top:152px;height:44px"></span>
-    <svg viewBox="0 0 390 190" role="img" aria-label="Confluence Easton">
-      <defs>
-        <filter id="glowPink" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur in="SourceGraphic" stdDeviation="2" result="a"/><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="glowRed" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="1.6" result="a"/><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <linearGradient id="rust" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9C4A22"/><stop offset=".45" stop-color="#6E2E14"/><stop offset=".7" stop-color="#8E4420"/><stop offset="1" stop-color="#4A1E0E"/></linearGradient>
-        <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" result="d"/><feTurbulence type="fractalNoise" baseFrequency=".35" numOctaves="4" seed="9" result="r"/><feColorMatrix in="r" type="matrix" values="0 0 0 0 .55  0 0 0 0 .2  0 0 0 0 .06  0 0 0 -2.2 1.35" result="spots"/><feComposite in="spots" in2="d" operator="in" result="rs"/><feMerge><feMergeNode in="d"/><feMergeNode in="rs"/></feMerge></filter>
-        <clipPath id="liveScript"><rect x="0" y="0" width="150" height="90"/><rect x="214" y="0" width="200" height="90"/></clipPath>
-      </defs>
-      <text x="195" y="58" text-anchor="middle" font-family="Yellowtail, cursive" font-size="58" fill="none" stroke="#5E5552" stroke-width="2.2">Confluence</text>
-      <text x="195" y="58" text-anchor="middle" font-family="Yellowtail, cursive" font-size="58" fill="none" stroke="#FFE3EC" stroke-width="2.2" filter="url(#glowPink)" clip-path="url(#liveScript)">Confluence</text>
-      <g font-family="Bebas Neue, Impact, sans-serif" font-size="96" filter="url(#rough)" fill="url(#rust)" stroke="#2A120A" stroke-width="2">
-        <text x="26" y="172">E</text><text x="84" y="172">A</text><text x="146" y="172">S</text><text x="204" y="172">T</text><text x="258" y="172">O</text><text x="318" y="172">N</text>
-      </g>
-      <g font-family="Bebas Neue, Impact, sans-serif" font-size="96" fill="none" stroke-width="1.6">
-        <text x="26" y="172" stroke="#FFC7BF" filter="url(#glowRed)">E</text>
-        <text x="84" y="172" stroke="#6A6560">A</text>
-        <text x="146" y="172" stroke="#FFC7BF" filter="url(#glowRed)" class="flicker">S</text>
-        <text x="204" y="172" stroke="#6A6560">T</text>
-        <text x="258" y="172" stroke="#FFC7BF" filter="url(#glowRed)">O</text>
-        <text x="318" y="172" stroke="#FFC7BF" filter="url(#glowRed)" class="flicker2">N</text>
-      </g>
-    </svg></div>`;
+  /* ---------- the sign at the top of Today ---------- */
+  // A real photo of an Easton sign goes here (settings.json "heroPhoto"); until then, just the neon script.
+  let heroPhoto = null;
+  function heroSign() {
+    const script = `<div class="hero-script glow-pink" aria-hidden="true">Confluence</div>`;
+    if (heroPhoto) return `<figure class="hero has-photo"><img src="${esc(heroPhoto.src)}" alt="${esc(heroPhoto.alt || 'A sign in downtown Easton')}">${script}
+      ${heroPhoto.credit ? `<figcaption>${esc(heroPhoto.credit)}</figcaption>` : ''}</figure>`;
+    return `<div class="hero">${script}<div class="hero-place caps">Easton · Pennsylvania</div></div>`;
+  }
 
   /* ---------- rows & cards ---------- */
   function evRow(o) {
@@ -225,7 +210,7 @@
     const mine = occurrences.filter(o => saved.has(o.key));
     const openNow = places.filter(p => (p.type === 'food' || p.type === 'shop') && openState(p)?.open).slice(0, 4);
     const featured = artists.find(a => a.featured) || artists[0];
-    return `${BIG_SIGN}
+    return `${heroSign()}
     <div class="notice">We're just getting started, so you'll see a few <span class="example">Example</span> listings while the real ones come in. Run a business, make things or put on events? <a href="/join/">Get on the map, free</a>.</div>
     <h2 class="title glow-pink">${wear(hello)}</h2><p class="subtitle">${esc(dayLabel(NOW.ymd).replace('Today · ', ''))} · Here's what's on downtown</p>
     ${mine.length ? `<div class="sec">Your plan</div><div class="list">${mine.map(evRow).join('')}</div>` : ''}
@@ -530,6 +515,7 @@
 
   const getJSON = f => fetch('/data/' + f, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(f); return r.json(); });
   Promise.all(['settings.json', 'places.json', 'events.json', 'artists.json', 'guides.json'].map(getJSON)).then(([settings, pl, ev, ar, gu]) => {
+    heroPhoto = settings.heroPhoto && settings.heroPhoto.src ? settings.heroPhoto : null;
     const keep = x => settings.showExamples || !x.example;
     places = pl.filter(keep); P = Object.fromEntries(places.map(p => [p.id, p]));
     events = ev.filter(keep).filter(e => !e.place || P[e.place]);

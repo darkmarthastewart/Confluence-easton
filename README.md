@@ -48,6 +48,16 @@ A business looks like this:
 
 Open the app with `#pick` at the end of the address (for example `https://your-site/#pick`), go to the spot on the map, and tap it. The app shows the latitude and longitude to copy into the listing.
 
+## The photo at the top of Today
+
+The top of the Today screen shows a real photo of an Easton sign, with the neon Confluence name over it. Save the photo in `site/photos/` and fill in `heroPhoto` in `site/data/settings.json`:
+
+```json
+"heroPhoto": {"src": "/photos/hero.jpg", "alt": "The Lafayette Bar sign on Northampton Street at dusk", "credit": "Photo: Jane Doe"}
+```
+
+`alt` describes the photo for people using screen readers; `credit` shows in the photo's corner (leave it empty to hide it). With no photo, Today opens with the neon name alone.
+
 ## Example content
 
 Everything marked `"example": true` is sample content to show how the app works. When enough real listings are in, set `"showExamples": false` in `site/data/settings.json` and every example disappears at once, including any guide that relied on one.

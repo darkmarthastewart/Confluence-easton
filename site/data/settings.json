@@ -1,4 +1,5 @@
 {
   "showExamples": true,
-  "joinPath": "/join/"
+  "joinPath": "/join/",
+  "heroPhoto": {"src": "", "alt": "", "credit": ""}
 }
