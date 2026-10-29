@@ -104,7 +104,7 @@ form .tube-btn{justify-self:start;min-height:56px;padding:0 34px;font-size:15px}
     </div>
   </div>
 
-  <p class="margin-note" id="founding" hidden style="margin-top:18px"></p>
+  <p id="founding" hidden style="margin:18px 0 0;font-size:17px;color:var(--soft)"></p>
 
   <h2>What's open</h2>
   <div class="cal">
@@ -180,7 +180,7 @@ form .tube-btn{justify-self:start;min-height:56px;padding:0 34px;font-size:15px}
       const early = pr.vendorEarly && today <= pr.vendorEarly.by ? pr.vendorEarly : null;
       $('#price-vendor').innerHTML = early ? `$${early.price}<small> · per season, if booked by ${label(early.by)} · then $${pr.vendorSpot}</small>` : `$${pr.vendorSpot}<small> · per season</small>`;
     }
-    if (pr.foundingNote) { const n = $('#founding'); n.textContent = pr.foundingNote.toLowerCase(); n.hidden = false; }
+    if (pr.foundingNote) { const n = $('#founding'); n.textContent = pr.foundingNote; n.hidden = false; }
     // the next eight weeks
     let w = monday(today), rows = '';
     for (let i = 0; i < 8; i++, w = add(w, 7)) {

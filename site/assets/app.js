@@ -35,17 +35,6 @@
     };
   }
   const NOW = eastonNow();
-  // Easton, weirdly: one true and slightly strange fact a day, scribbled in the margin in red marker
-  const WEIRD = [
-    "the farmers' market started in 1752. it's older than the country. the tomatoes have seniority.",
-    "every winter the soldiers' and sailors' monument dresses up as a giant candle. we call it the peace candle. we don't ask questions.",
-    "the declaration of independence got read out loud on the circle in 1776. people have been making announcements here ever since.",
-    "the free bridge is free. the toll bridge upstream is not. choose wisely.",
-    "the road along the river is named for larry holmes, the heavyweight champ from easton. walk it like a champ.",
-    "two rivers meet here and neither one blinks.",
-    "easton sits at the forks of the delaware. the forks are rivers. please do not eat with them."
-  ];
-  const weirdToday = () => WEIRD[Math.floor(ymdDate(NOW.ymd) / 864e5) % WEIRD.length];
   const MAKERS = '<a class="makers" href="https://marthathinkstoomuch.com" target="_blank" rel="noopener"><span class="hex">DMS</span>made in Easton by Dark Martha Stewart</a>';
   const ymdDate = ymd => { const [y, m, d] = ymd.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d)); };
   const addDays = (ymd, n) => { const d = ymdDate(ymd); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
@@ -312,7 +301,6 @@
       ? `<img class="season-art" src="${esc(z.art.banner)}" alt="${esc(z.art.alt || z.name)}">`
       : `<div class="season-sign"><div class="season-name">${wear(z.name, 9)}</div></div>`;
     return `<section class="season" aria-label="${esc(z.name)}">${banner}
-      ${z.note ? `<p class="margin-note">${esc(z.note)}</p>` : ''}
       ${z.vendorsLive.length ? `<div class="sec">Holiday vendors <span class="to-tag">Paid spots</span></div>
         <div class="list">${z.vendorsLive.map(v => placeRow(P[v.place], v.offer)).join('')}</div>` : ''}
       ${left ? `<p class="empty">${left} of ${z.vendorSpots} vendor spots left this season. <a href="/takeovers/#vendor">Claim one</a>.</p>` : ''}
@@ -334,7 +322,6 @@
     if (!a) { const f = artists.find(x => x.featured) || artists[0]; return f ? `<div class="sec">Someone you should know</div>${artistCard(f, true)}` : ''; }
     const month = MONTH_NAMES[Number(t.month.slice(5, 7)) - 1];
     return `<div class="sec">${esc(month)}'s artist takeover <span class="to-tag">Trade</span></div>
-      ${t.headline ? `<p class="margin-note" style="margin-top:0">${esc(t.headline.toLowerCase())}.</p>` : ''}
       ${artistCard(a, true)}`;
   }
 
@@ -351,7 +338,6 @@
     ${seasonBlock()}
     <div class="notice">We're just getting started, so you'll see a few <span class="example">Example</span> listings while the real ones come in. Run a business, make things or put on events? <a href="/join/">Get on the map, free</a>.</div>
     <h2 class="title glow-pink">${wear(hello)}</h2><p class="subtitle">${esc(dayLabel(NOW.ymd).replace('Today · ', ''))} · Here's what's on downtown</p>
-    <p class="margin-note"><span class="k">Easton, weirdly</span>${esc(weirdToday())}</p>
     ${mine.length ? `<div class="sec">Your plan</div><div class="list">${mine.map(evRow).join('')}</div>` : ''}
     <div class="enamel board" style="margin-top:20px">
       <div class="board-head glow-yellow">${wear(todays.length ? 'ON TODAY' : 'COMING UP', 3)}</div>
@@ -370,11 +356,10 @@
     const cats = [['all', 'All'], ['music', 'Music'], ['art', 'Art'], ['family', 'Family'], ['food', 'Food'], ['free', 'Free']];
     const list = occurrences.filter(o => S.evCat === 'all' || (S.evCat === 'free' ? o.free : (o.cats || []).includes(S.evCat)));
     const days = [...new Set(list.map(o => o.ymd))];
-    const firstMarket = (list.find(o => o.repeat) || {}).key;
     return `<h2 class="title glow-pink">${wear("What's on")}</h2><p class="subtitle">The next two weeks, from the Circle down to the river</p>
     <div class="chips" role="group" aria-label="Filter events" style="margin-top:14px">${cats.map(([k, l]) => `<button class="chip" type="button" data-evcat="${k}" aria-pressed="${S.evCat === k}">${l}</button>`).join('')}</div>
     ${days.length ? days.map(d => `<div class="day"><span class="rusttag">${esc(dayLabel(d).toUpperCase())}</span></div>
-      <div class="list">${list.filter(o => o.ymd === d).map(o => o.repeat ? marketCard(o) + (o.key === firstMarket ? '<p class="margin-note">older than the country. the tomatoes have seniority.</p>' : '') : evRow(o)).join('')}</div>`).join('')
+      <div class="list">${list.filter(o => o.ymd === d).map(o => o.repeat ? marketCard(o) : evRow(o)).join('')}</div>`).join('')
       : '<p class="empty">Nothing like that on the calendar yet. Try another, or check back soon.</p>'}
     <p class="empty">Putting something on? <a href="/join/#event">Add your event, free</a>.</p>`;
   }
@@ -427,10 +412,7 @@
     return `<h2 class="title glow-pink">${wear("Day or night, Easton's yours")}</h2><p class="lede">Plans you can walk, from the first coffee to the last light on the river. Each one maps its own route.</p>
       ${day.length ? `<div class="sec">While the sun's up</div><div class="gridguides">${day.map(guideCard).join('')}</div>` : ''}
       ${night.length ? `<div class="sec">After dark</div><div class="gridguides">${night.map(guideCard).join('')}</div>` : ''}
-      <button class="assistant" type="button" id="assistant" aria-label="The research assistant has an opinion">
-        <img src="/assets/research-assistant.png" alt="" width="120" height="129">
-        <span><span class="say">research assistant's pick: scott park. there are sticks. so many sticks.</span><span class="tap">The research assistant · tap him</span></span>
-      </button>`;
+      <img class="assistant-img" src="/assets/research-assistant.png" alt="" width="120" height="129">`;
   }
 
   /* ---------- map ---------- */
@@ -646,7 +628,6 @@
     if (t.id === 'closecard') { S.sel = null; return renderMap(); }
     if (t.id === 'backguides') { S.guide = null; return render(); }
     if (t.id === 'planbtn') return planSheet();
-    if (t.id === 'assistant') { t.classList.toggle('on'); return; }
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { if ($('#welcome')) closeWelcome(); else closeSheet(); } });
   document.addEventListener('input', e => {
