@@ -119,6 +119,73 @@
     return out.sort((a, b) => (a.ymd + a.start).localeCompare(b.ymd + b.start));
   }
 
+  /* ---------- sun, sky and weather ---------- */
+  const LAT = 40.6912, LNG = -75.2091;
+  // minutes between UTC and Easton right now (-240 in summer, -300 in winter)
+  const TZ_OFFSET = (() => { const d = new Date(); let o = NOW.min - (d.getUTCHours() * 60 + d.getUTCMinutes()); if (o > 720) o -= 1440; if (o < -720) o += 1440; return o; })();
+  // NOAA's sunrise equation, good to a minute or two. Returns Easton minutes after midnight.
+  function sunTimes(ymd) {
+    const d = ymdDate(ymd), n = Math.floor((d - Date.UTC(d.getUTCFullYear(), 0, 1)) / 864e5) + 1, g = 2 * Math.PI / 365 * (n - 1);
+    const eq = 229.18 * (0.000075 + 0.001868 * Math.cos(g) - 0.032077 * Math.sin(g) - 0.014615 * Math.cos(2 * g) - 0.040849 * Math.sin(2 * g));
+    const decl = 0.006918 - 0.399912 * Math.cos(g) + 0.070257 * Math.sin(g) - 0.006758 * Math.cos(2 * g) + 0.000907 * Math.sin(2 * g) - 0.002697 * Math.cos(3 * g) + 0.00148 * Math.sin(3 * g);
+    const lat = LAT * Math.PI / 180;
+    const ha = Math.acos(Math.cos(90.833 * Math.PI / 180) / (Math.cos(lat) * Math.cos(decl)) - Math.tan(lat) * Math.tan(decl)) * 180 / Math.PI;
+    return { rise: Math.round(720 - 4 * (LNG + ha) - eq + TZ_OFFSET), set: Math.round(720 - 4 * (LNG - ha) - eq + TZ_OFFSET) };
+  }
+  const sun = sunTimes(NOW.ymd);
+  const PHASES = { dawn: 'Dawn', day: 'Daylight', golden: 'Golden hour', blue: 'Blue hour', night: 'Night' };
+  const PHASE_BG = { dawn: '#3A2A2C', day: '#5A3B30', golden: '#4A2A22', blue: '#1E1820', night: '#211714' };
+  // the signs are off by day, warm up before sunset, burn after dark and fade at dawn
+  function phaseAt(min) {
+    if (min >= sun.rise - 40 && min < sun.rise + 50) return 'dawn';
+    if (min >= sun.rise + 50 && min < sun.set - 75) return 'day';
+    if (min >= sun.set - 75 && min < sun.set + 10) return 'golden';
+    if (min >= sun.set + 10 && min < sun.set + 55) return 'blue';
+    return 'night';
+  }
+  function applyPhase() {
+    const p = phaseAt(eastonNow().min);
+    document.documentElement.dataset.phase = p;
+    const meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.content = PHASE_BG[p];
+    return p;
+  }
+
+  let weather = null;
+  const sky = code => code === 0 ? 'Clear' : code <= 2 ? 'Partly cloudy' : code === 3 ? 'Overcast' : code <= 48 ? 'Foggy' : code <= 57 ? 'Drizzle'
+    : code <= 67 ? 'Rain' : code <= 77 ? 'Snow' : code <= 82 ? 'Showers' : code <= 86 ? 'Snow showers' : 'Thunderstorms';
+  function loadWeather() {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LNG}&current=temperature_2m,apparent_temperature,weather_code`
+      + '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=1';
+    fetch(url).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => {
+      weather = { temp: Math.round(d.current.temperature_2m), feels: Math.round(d.current.apparent_temperature), code: d.current.weather_code,
+        hi: Math.round(d.daily.temperature_2m_max[0]), lo: Math.round(d.daily.temperature_2m_min[0]), rain: d.daily.precipitation_probability_max[0] };
+      refreshSky();
+    }).catch(() => {});
+  }
+  function refreshSky() { const el = $('#skybox'); if (el) el.outerHTML = skyBox(); }
+
+  // the sky over the Forks: weather on the left, the sun's arc from sunrise to sunset on the right
+  function skyBox() {
+    const p = document.documentElement.dataset.phase || 'night', m = eastonNow().min;
+    const color = { dawn: 'pink', day: 'yellow', golden: 'yellow', blue: 'teal', night: 'pink' }[p];
+    const up = m >= sun.rise && m <= sun.set, t = up ? (m - sun.rise) / (sun.set - sun.rise) : 0;
+    const x = (10 + 130 * t).toFixed(1), y = (70 - 232 * t * (1 - t)).toFixed(1);
+    const body = up ? `<circle cx="${x}" cy="${y}" r="8" fill="#FFE7A0" style="filter:drop-shadow(0 0 6px #FF9F1A)"/>`
+      : `<path d="M82 20 a13 13 0 1 0 13 17 a10 10 0 0 1 -13 -17 Z" fill="#E9E2D6" style="filter:drop-shadow(0 0 5px #9FB4FF)"/>`;
+    const next = up ? `Sunset at ${fmt(sun.set)}` : m < sun.rise ? `Sun's up at ${fmt(sun.rise)}` : `Sun's up tomorrow at ${fmt(sunTimes(addDays(NOW.ymd, 1)).rise)}`;
+    const w = weather ? `<div class="temp">${weather.temp}°<small>feels ${weather.feels}°</small></div><div class="cond">${esc(sky(weather.code))}</div>
+        <div class="more">High ${weather.hi}° · low ${weather.lo}° · ${weather.rain ?? 0}% chance of rain</div>`
+      : `<div class="more" style="margin-top:6px">${esc(next)}</div>`;
+    return `<section class="skybox enamel" id="skybox" aria-label="Sky and weather over Easton">
+      <div style="min-width:0"><div class="phase glow-${color}">${wear(PHASES[p], 6)}</div>${w}
+        ${weather ? `<div class="credit">Weather from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></div>` : ''}</div>
+      <div><svg viewBox="0 0 150 80" role="img" aria-label="${esc(next)}"><path d="M10 70 Q75 -46 140 70" fill="none" stroke="var(--dead)" stroke-width="2" stroke-dasharray="3 5"/>
+        <line x1="0" y1="70" x2="150" y2="70" stroke="var(--line)" stroke-width="2"/>${body}</svg>
+        <div class="times"><span>↑ ${fmt(sun.rise)}</span><span>↓ ${fmt(sun.set)}</span></div>
+        ${weather ? `<div class="sundown">${esc(next)}</div>` : ''}</div>
+    </section>`;
+  }
+
   /* ---------- helpers ---------- */
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -223,6 +290,7 @@
     const openNow = places.filter(p => (p.type === 'food' || p.type === 'shop') && openState(p)?.open).slice(0, 4);
     const featured = artists.find(a => a.featured) || artists[0];
     return `${heroSign()}
+    ${skyBox()}
     <div class="notice">We're just getting started, so you'll see a few <span class="example">Example</span> listings while the real ones come in. Run a business, make things or put on events? <a href="/join/">Get on the map, free</a>.</div>
     <h2 class="title glow-pink">${wear(hello)}</h2><p class="subtitle">${esc(dayLabel(NOW.ymd).replace('Today · ', ''))} · Here's what's on downtown</p>
     <p class="margin-note"><span class="k">Easton, weirdly</span>${esc(weirdToday())}</p>
@@ -529,6 +597,10 @@
   window.addEventListener('hashchange', fromHash);
 
   /* ---------- load ---------- */
+  applyPhase();
+  loadWeather();
+  setInterval(() => { applyPhase(); if (S.tab === 'today') refreshSky(); }, 60000);
+  setInterval(loadWeather, 30 * 60000);
   let welcomed = false;
   try { welcomed = localStorage.getItem('confluence-welcomed') === '1'; } catch (e) {}
   if (!welcomed && !location.hash) welcome();

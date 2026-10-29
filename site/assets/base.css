@@ -11,6 +11,7 @@
 
 :root{
   --brick:#211714; --mortar:rgba(0,0,0,.45);
+  --sky:linear-gradient(transparent,transparent);
   --enamel:#1A1B1C; --enamel-edge:#0E0F10;
   --rust:#8E4420; --rust-dark:#4A200E; --rust-light:#C9875A;
   --ink:#E9E2D6; --soft:#B8AEA2; --muted:#9E958A; --line:#3A3532;
@@ -39,7 +40,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 
 /* materials */
-.night{background-color:var(--brick);background-image:
+.night{background-color:var(--brick);background-image:var(--sky),
   repeating-linear-gradient(0deg,var(--mortar) 0 2px,transparent 2px 24px),
   repeating-linear-gradient(90deg,rgba(0,0,0,.38) 0 2px,transparent 2px 56px)}
 .enamel{background-color:var(--enamel);background-image:

@@ -48,6 +48,22 @@ A business looks like this:
 
 Open the app with `#pick` at the end of the address (for example `https://your-site/#pick`), go to the spot on the map, and tap it. The app shows the latitude and longitude to copy into the listing.
 
+## Time of day and weather
+
+The app follows Easton's real sun. Sunrise and sunset are worked out in the app itself (NOAA's sunrise equation, good to a minute or two), so this works offline. From them it picks one of five looks, checked every minute:
+
+| Phase | When | Look |
+| --- | --- | --- |
+| Dawn | 40 minutes before sunrise to 50 after | pink-blue wash, signs fading off |
+| Daylight | the rest of the day | sunlit brick, neon switched off (OPEN signs stay lit) |
+| Golden hour | 75 minutes before sunset to 10 after | orange wash, signs warming up |
+| Blue hour | 10 to 55 minutes after sunset | deep blue wash, signs on |
+| Night | until dawn | full neon |
+
+The windows are in `phaseAt()` in `site/assets/app.js`; the looks are at the end of `site/assets/app.css`.
+
+The weather on Today comes from [Open-Meteo](https://open-meteo.com/): free, no account or key, refreshed every 30 minutes. Its terms ask for credit, which the panel shows. If the weather can't load, the panel still shows the sun's arc and the next sunrise or sunset.
+
 ## The photo at the top of Today
 
 The top of the Today screen shows a real photo of an Easton sign, with the neon Confluence name over it. Save the photo in `site/photos/` and fill in `heroPhoto` in `site/data/settings.json`:

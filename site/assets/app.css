@@ -170,3 +170,51 @@ body{background:#120C0A}
 .assistant .say{margin-bottom:46px;opacity:0;transform:scale(.5) rotate(6deg);transform-origin:0 100%;transition:opacity .18s,transform .35s cubic-bezier(.3,1.7,.5,1)}
 .assistant .tap{display:block;font-family:var(--caps);font-weight:600;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-top:4px}
 .assistant:hover .say,.assistant:focus-visible .say,.assistant.on .say{opacity:1;transform:none}
+
+/* ---------- time of day ----------
+   The app follows Easton's real sun. The signs are off by day, warm up at golden hour, burn at blue hour and night,
+   and fade at dawn. OPEN signs stay lit whenever a place is open, like a real shop window. */
+html[data-phase="dawn"]{--brick:#3A2A2C;--mortar:rgba(0,0,0,.38);--sky:linear-gradient(180deg,rgba(255,170,190,.30),rgba(140,170,220,.16) 240px,transparent 520px)}
+html[data-phase="day"]{--brick:#5A3B30;--mortar:rgba(0,0,0,.30);--sky:linear-gradient(180deg,rgba(255,226,170,.22),rgba(255,226,170,.06) 300px,transparent 560px)}
+html[data-phase="golden"]{--brick:#4A2A22;--mortar:rgba(0,0,0,.36);--sky:linear-gradient(180deg,rgba(255,140,60,.34),rgba(255,90,60,.12) 280px,transparent 560px)}
+html[data-phase="blue"]{--brick:#1E1820;--mortar:rgba(0,0,0,.45);--sky:linear-gradient(180deg,rgba(60,80,170,.42),rgba(60,80,170,.12) 280px,transparent 560px)}
+html[data-phase="night"]{--sky:radial-gradient(ellipse 340px 200px at 50% 90px,rgba(255,80,110,.14),transparent 70%)}
+body{transition:background-color .6s}
+
+/* daylight: tubes switched off, glass and dust instead of glow */
+html[data-phase="day"] .glow-pink{color:#E6BFCB;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+html[data-phase="day"] .glow-yellow{color:#EBD9A6;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+html[data-phase="day"] .glow-red{color:#E9C2BC;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+html[data-phase="day"] .glow-teal{color:#C6E4DF;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+html[data-phase="day"] .glow-lime{color:#D8E8B8;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+html[data-phase="day"] .flicker,html[data-phase="day"] .flicker2{animation:none}
+html[data-phase="day"] .tube-btn{box-shadow:none;text-shadow:none;border-color:#D9B8C2;color:#F2DDE4}
+html[data-phase="day"] .chip[aria-pressed="true"],html[data-phase="day"] .seg button[aria-pressed="true"]{box-shadow:none;text-shadow:none}
+html[data-phase="day"] .tab[aria-current="page"]{color:#F2E2B4;text-shadow:none;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+html[data-phase="day"] .ring,html[data-phase="day"] .pin-num{box-shadow:none;text-shadow:none}
+html[data-phase="day"] .timeline li::before{box-shadow:none}
+html[data-phase="day"] .neon-route{filter:none}
+html[data-phase="day"] .leaflet-tile-pane{filter:sepia(.25) saturate(.8) brightness(.95)}
+html[data-phase="day"] .pin{box-shadow:none}
+
+/* dawn and golden hour: tubes warming up or cooling down, half the glow */
+html[data-phase="dawn"] .glow-pink,html[data-phase="golden"] .glow-pink{text-shadow:0 0 2px #FFF0F5,0 0 6px rgba(255,92,154,.6)}
+html[data-phase="dawn"] .glow-yellow,html[data-phase="golden"] .glow-yellow{text-shadow:0 0 2px #FFF4CF,0 0 5px rgba(255,201,60,.6)}
+html[data-phase="dawn"] .glow-red,html[data-phase="golden"] .glow-red{text-shadow:0 0 2px #FFE6E1,0 0 5px rgba(255,90,79,.6)}
+html[data-phase="dawn"] .glow-teal,html[data-phase="golden"] .glow-teal{text-shadow:0 0 2px #EFFFFC,0 0 5px rgba(63,224,207,.6)}
+html[data-phase="dawn"] .glow-lime,html[data-phase="golden"] .glow-lime{text-shadow:0 0 2px #F4FFDC,0 0 5px rgba(181,227,90,.6)}
+html[data-phase="dawn"] .leaflet-tile-pane{filter:invert(1) hue-rotate(185deg) brightness(.8) contrast(1.05) saturate(.5) sepia(.15)}
+html[data-phase="golden"] .leaflet-tile-pane{filter:sepia(.55) saturate(1.1) brightness(.78) contrast(1.05) hue-rotate(-10deg)}
+
+/* the sky over the Forks: weather and the sun's arc on Today */
+.skybox{background-image:linear-gradient(170deg,rgba(255,255,255,.04),transparent 40%,rgba(0,0,0,.3)),radial-gradient(ellipse 90px 26px at 2% 96%,rgba(150,70,28,.85),transparent 70%);margin-top:16px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:10px;align-items:center}
+.skybox .phase{font-family:var(--caps);font-weight:800;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+.skybox .temp{font-family:var(--block);font-size:46px;line-height:1;margin-top:4px}
+.skybox .temp small{font-family:var(--body);font-size:16px;color:var(--soft);margin-left:6px;letter-spacing:0}
+.skybox .cond{font-weight:700;font-size:17px;text-transform:uppercase;line-height:1.15}
+.skybox .more{font-size:14px;color:var(--soft);margin-top:2px}
+.skybox .credit{font-size:11px;color:var(--muted);margin-top:6px}
+.skybox .credit a{color:var(--muted)}
+.skybox svg{display:block;width:150px;height:auto;overflow:visible}
+.skybox .times{display:flex;justify-content:space-between;font-family:var(--caps);font-weight:600;font-size:10px;letter-spacing:.08em;color:var(--soft);margin-top:2px}
+.skybox .sundown{font-size:13px;color:var(--soft);text-align:center;margin-top:4px}
