@@ -8,6 +8,10 @@ A free public app for downtown Easton, PA: events, a map, businesses, creative s
 
 There is no build step. Netlify publishes the `site/` folder as is.
 
+## Artwork rule
+
+**Never use any graphic as is.** That includes the CinCin illustrations and any other artwork, pack or reference material. Not cropped, not traced, not recolored, not masked, not lit up as neon. Graphics in this app are drawn new for it. Reference material can inform a drawing; it never ships.
+
 ## Put it online (Netlify)
 
 1. In Netlify, choose **Add new site → Import an existing project** and pick this repository. The settings come from `netlify.toml`, so there's nothing to fill in.
