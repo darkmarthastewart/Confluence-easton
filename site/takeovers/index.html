@@ -104,6 +104,8 @@ form .tube-btn{justify-self:start;min-height:56px;padding:0 34px;font-size:15px}
     </div>
   </div>
 
+  <p class="margin-note" id="founding" hidden style="margin-top:18px"></p>
+
   <h2>What's open</h2>
   <div class="cal">
     <div><h3>Business weeks</h3><div id="weeks"><p class="spots" style="color:var(--soft)">Loading the calendar…</p></div></div>
@@ -172,8 +174,13 @@ form .tube-btn{justify-self:start;min-height:56px;padding:0 34px;font-size:15px}
   Promise.all([fetch('/data/takeovers.json',{cache:'no-cache'}).then(r=>r.json()), fetch('/data/places.json',{cache:'no-cache'}).then(r=>r.json()), fetch('/data/artists.json',{cache:'no-cache'}).then(r=>r.json())])
   .then(([t, places, artists]) => {
     const P = Object.fromEntries(places.map(p=>[p.id,p])), A = Object.fromEntries(artists.map(a=>[a.id,a]));
-    if (t.prices && t.prices.businessWeek != null) $('#price-week').innerHTML = `$${t.prices.businessWeek}<small> · per week</small>`;
-    if (t.prices && t.prices.vendorSpot != null) $('#price-vendor').innerHTML = `$${t.prices.vendorSpot}<small> · per season</small>`;
+    const pr = t.prices || {};
+    if (pr.businessWeek != null) $('#price-week').innerHTML = `$${pr.businessWeek}<small> · per week</small>`;
+    if (pr.vendorSpot != null) {
+      const early = pr.vendorEarly && today <= pr.vendorEarly.by ? pr.vendorEarly : null;
+      $('#price-vendor').innerHTML = early ? `$${early.price}<small> · per season, if booked by ${label(early.by)} · then $${pr.vendorSpot}</small>` : `$${pr.vendorSpot}<small> · per season</small>`;
+    }
+    if (pr.foundingNote) { const n = $('#founding'); n.textContent = pr.foundingNote.toLowerCase(); n.hidden = false; }
     // the next eight weeks
     let w = monday(today), rows = '';
     for (let i = 0; i < 8; i++, w = add(w, 7)) {

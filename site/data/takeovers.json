@@ -1,8 +1,13 @@
 {
-  "_how": "Prices: a number shows as $N on the booking page; null shows 'Ask about pricing'. Weeks run Monday to Sunday (weekOf is a Monday). Months are YYYY-MM.",
+  "_how": "Prices: a number shows as $N on the booking page; null shows 'Ask about pricing'. vendorEarly gives a lower vendor price until its date. foundingNote shows under the prices while set. Weeks run Monday to Sunday (weekOf is a Monday). Months are YYYY-MM.",
   "prices": {
-    "businessWeek": null,
-    "vendorSpot": null
+    "businessWeek": 75,
+    "vendorSpot": 99,
+    "vendorEarly": {
+      "price": 79,
+      "by": "2026-11-15"
+    },
+    "foundingNote": "Founding prices. Book now and keep your rate for a year, even after prices go up."
   },
   "businessesPerMonth": 4,
   "seasons": [
@@ -14,11 +19,26 @@
       "end": "2027-01-01",
       "vendorSpots": 12,
       "note": "the soldiers' and sailors' monument goes full candle. we push christmas in these parts.",
-      "art": { "banner": "", "alt": "" },
+      "art": {
+        "banner": "",
+        "alt": ""
+      },
       "vendors": [
-        { "example": true, "place": "kite", "offer": "Wooden ornaments, hand-painted downtown." },
-        { "example": true, "place": "ironore", "offer": "Gift-wrapped local history, free." },
-        { "example": true, "place": "lantern", "offer": "Gingerbread rowhouses, Saturdays only." }
+        {
+          "example": true,
+          "place": "kite",
+          "offer": "Wooden ornaments, hand-painted downtown."
+        },
+        {
+          "example": true,
+          "place": "ironore",
+          "offer": "Gift-wrapped local history, free."
+        },
+        {
+          "example": true,
+          "place": "lantern",
+          "offer": "Gingerbread rowhouses, Saturdays only."
+        }
       ]
     }
   ],
@@ -28,14 +48,20 @@
       "month": "2026-10",
       "artist": "okafor",
       "headline": "Dana Okafor paints the town",
-      "art": { "banner": "", "alt": "" }
+      "art": {
+        "banner": "",
+        "alt": ""
+      }
     },
     {
       "example": true,
       "month": "2026-11",
       "artist": "whitcomb",
       "headline": "Mae Whitcomb prints the town",
-      "art": { "banner": "", "alt": "" }
+      "art": {
+        "banner": "",
+        "alt": ""
+      }
     }
   ],
   "businesses": [
