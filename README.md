@@ -10,7 +10,7 @@ There is no build step. Netlify publishes the `site/` folder as is.
 
 ## Artwork rule
 
-**Never use any graphic as is.** That includes the CinCin illustrations and any other artwork, pack or reference material. Not cropped, not traced, not recolored, not masked, not lit up as neon. Graphics in this app are drawn new for it. Reference material can inform a drawing; it never ships.
+**Never use any graphic as is, and never promote one.** Licensed packs (like CinCin) and other reference material can inspire the app's art, but their drawings don't go in as they are: not cropped, traced, recolored, masked or lit up as neon. They're also never featured, credited as the app's art or shown off in its marketing. What ships is drawn new for this app.
 
 ## Put it online (Netlify)
 
