@@ -1,0 +1,57 @@
+{
+  "_how": "Prices: a number shows as $N on the booking page; null shows 'Ask about pricing'. Weeks run Monday to Sunday (weekOf is a Monday). Months are YYYY-MM.",
+  "prices": {
+    "businessWeek": null,
+    "vendorSpot": null
+  },
+  "businessesPerMonth": 4,
+  "seasons": [
+    {
+      "id": "christmas-2026",
+      "theme": "christmas",
+      "name": "Christmas in Easton",
+      "start": "2026-11-27",
+      "end": "2027-01-01",
+      "vendorSpots": 12,
+      "note": "the soldiers' and sailors' monument goes full candle. we push christmas in these parts.",
+      "art": { "banner": "", "alt": "" },
+      "vendors": [
+        { "example": true, "place": "kite", "offer": "Wooden ornaments, hand-painted downtown." },
+        { "example": true, "place": "ironore", "offer": "Gift-wrapped local history, free." },
+        { "example": true, "place": "lantern", "offer": "Gingerbread rowhouses, Saturdays only." }
+      ]
+    }
+  ],
+  "artists": [
+    {
+      "example": true,
+      "month": "2026-10",
+      "artist": "okafor",
+      "headline": "Dana Okafor paints the town",
+      "art": { "banner": "", "alt": "" }
+    },
+    {
+      "example": true,
+      "month": "2026-11",
+      "artist": "whitcomb",
+      "headline": "Mae Whitcomb prints the town",
+      "art": { "banner": "", "alt": "" }
+    }
+  ],
+  "businesses": [
+    {
+      "example": true,
+      "weekOf": "2026-10-26",
+      "place": "lowbridge",
+      "headline": "Low Bridge lights up the week",
+      "offer": "Show this screen for a free zero-proof flight, Thursday through Sunday."
+    },
+    {
+      "example": true,
+      "weekOf": "2026-11-02",
+      "place": "kindling",
+      "headline": "Kindling fires up the week",
+      "offer": "Kids eat free on Tuesdays with a grown-up's pie."
+    }
+  ]
+}

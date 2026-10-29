@@ -151,14 +151,22 @@
   }
 
   let weather = null;
-  const sky = code => code === 0 ? 'Clear' : code <= 2 ? 'Partly cloudy' : code === 3 ? 'Overcast' : code <= 48 ? 'Foggy' : code <= 57 ? 'Drizzle'
-    : code <= 67 ? 'Rain' : code <= 77 ? 'Snow' : code <= 82 ? 'Showers' : code <= 86 ? 'Snow showers' : 'Thunderstorms';
+  // The National Weather Service: free for any use, no key. First find Easton's forecast office grid (kept for a day), then read it.
+  const getNWS = url => fetch(url).then(r => r.ok ? r.json() : Promise.reject(r.status));
+  function nwsGrid() {
+    try { const c = JSON.parse(localStorage.getItem('confluence-nws') || 'null'); if (c && Date.now() - c.at < 864e5) return Promise.resolve(c); } catch (e) {}
+    return getNWS(`https://api.weather.gov/points/${LAT},${LNG}`).then(d => {
+      const c = { at: Date.now(), daily: d.properties.forecast, hourly: d.properties.forecastHourly };
+      try { localStorage.setItem('confluence-nws', JSON.stringify(c)); } catch (e) {}
+      return c;
+    });
+  }
   function loadWeather() {
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LNG}&current=temperature_2m,apparent_temperature,weather_code`
-      + '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=1';
-    fetch(url).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(d => {
-      weather = { temp: Math.round(d.current.temperature_2m), feels: Math.round(d.current.apparent_temperature), code: d.current.weather_code,
-        hi: Math.round(d.daily.temperature_2m_max[0]), lo: Math.round(d.daily.temperature_2m_min[0]), rain: d.daily.precipitation_probability_max[0] };
+    nwsGrid().then(g => Promise.all([getNWS(g.hourly), getNWS(g.daily)])).then(([h, d]) => {
+      const now = h.properties.periods[0], periods = d.properties.periods;
+      const day = periods.find(p => p.isDaytime), night = periods.find(p => !p.isDaytime);
+      weather = { temp: now.temperature, cond: now.shortForecast, rain: now.probabilityOfPrecipitation ? now.probabilityOfPrecipitation.value : null,
+        hi: day ? day.temperature : null, lo: night ? night.temperature : null };
       refreshSky();
     }).catch(() => {});
   }
@@ -173,12 +181,12 @@
     const body = up ? `<circle cx="${x}" cy="${y}" r="8" fill="#FFE7A0" style="filter:drop-shadow(0 0 6px #FF9F1A)"/>`
       : `<path d="M82 20 a13 13 0 1 0 13 17 a10 10 0 0 1 -13 -17 Z" fill="#E9E2D6" style="filter:drop-shadow(0 0 5px #9FB4FF)"/>`;
     const next = up ? `Sunset at ${fmt(sun.set)}` : m < sun.rise ? `Sun's up at ${fmt(sun.rise)}` : `Sun's up tomorrow at ${fmt(sunTimes(addDays(NOW.ymd, 1)).rise)}`;
-    const w = weather ? `<div class="temp">${weather.temp}°<small>feels ${weather.feels}°</small></div><div class="cond">${esc(sky(weather.code))}</div>
-        <div class="more">High ${weather.hi}° · low ${weather.lo}° · ${weather.rain ?? 0}% chance of rain</div>`
+    const more = [weather && weather.hi != null ? `High ${weather.hi}°` : '', weather && weather.lo != null ? `low ${weather.lo}°` : '', weather && weather.rain != null ? `${weather.rain}% chance of rain` : ''].filter(Boolean).join(' · ');
+    const w = weather ? `<div class="temp">${weather.temp}°</div><div class="cond">${esc(weather.cond)}</div>${more ? `<div class="more">${more}</div>` : ''}`
       : `<div class="more" style="margin-top:6px">${esc(next)}</div>`;
     return `<section class="skybox enamel" id="skybox" aria-label="Sky and weather over Easton">
       <div style="min-width:0"><div class="phase glow-${color}">${wear(PHASES[p], 6)}</div>${w}
-        ${weather ? `<div class="credit">Weather from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></div>` : ''}</div>
+        ${weather ? `<div class="credit">Weather from the <a href="https://www.weather.gov/" target="_blank" rel="noopener">National Weather Service</a></div>` : ''}</div>
       <div><svg viewBox="0 0 150 80" role="img" aria-label="${esc(next)}"><path d="M10 70 Q75 -46 140 70" fill="none" stroke="var(--dead)" stroke-width="2" stroke-dasharray="3 5"/>
         <line x1="0" y1="70" x2="150" y2="70" stroke="var(--line)" stroke-width="2"/>${body}</svg>
         <div class="times"><span>↑ ${fmt(sun.rise)}</span><span>↓ ${fmt(sun.set)}</span></div>
@@ -230,6 +238,9 @@
   let heroPhoto = null;
   function heroSign() {
     const script = `<div class="hero-script glow-pink" aria-hidden="true">Confluence</div>`;
+    const ta = TO.artist && TO.artist.art && TO.artist.art.banner ? TO.artist : null;
+    if (ta) { const who = artists.find(x => x.id === ta.artist); return `<figure class="hero has-photo"><div class="photo"><img src="${esc(ta.art.banner)}" alt="${esc(ta.art.alt || 'Artwork by ' + (who ? who.name : 'this month\'s artist'))}">
+      <figcaption>Takeover by ${esc(who ? who.name : 'this month\'s artist')}</figcaption></div>${script}</figure>`; }
     if (heroPhoto) return `<figure class="hero has-photo" style="margin-bottom:0"><div class="photo"><img src="${esc(heroPhoto.src)}" alt="${esc(heroPhoto.alt || 'A sign in downtown Easton')}">
       ${heroPhoto.credit ? `<figcaption>${esc(heroPhoto.credit)}</figcaption>` : ''}</div>${script}</figure>`;
     return `<div class="hero">${script}<div class="hero-place caps">Easton · Pennsylvania</div></div>`;
@@ -256,14 +267,14 @@
     if (p.photo) return `<div class="plaque"><img src="${esc(p.photo)}" alt=""></div>`;
     return `<div class="plaque ${lit ? 'glow-' + TYPES[p.type].glow : 'dead'}">${esc(initials(p.name))}</div>`;
   }
-  function placeRow(p) {
+  function placeRow(p, offer) {
     const o = openState(p);
-    const sub = p.type === 'creative' && p.tags ? p.tags.join(' · ') : p.sub + (p.price ? ' · ' + p.price : '');
+    const sub = offer || (p.type === 'creative' && p.tags ? p.tags.join(' · ') : p.sub + (p.price ? ' · ' + p.price : ''));
     const lit = !o || o.open;
     const sign = o ? (o.open ? '<span class="open-sign">OPEN</span>' : '<span class="closed-sign">CLOSED</span>') : '';
     return `<button class="row place" type="button" data-place="${esc(p.id)}">${plaque(p, lit)}
       <div style="min-width:0"><div class="row-title"${lit ? '' : ' style="color:var(--soft)"'}>${esc(p.name)}</div><div class="row-sub">${esc(sub)}${o && !o.open ? ' · ' + esc(o.txt) : ''}</div></div>
-      <div class="row-end">${sign}${p.example ? '<span class="example">Example</span>' : ''}</div></button>`;
+      <div class="row-end">${sign}${TO.business && TO.business.place === p.id ? takeoverTag : ''}${p.example ? '<span class="example">Example</span>' : ''}</div></button>`;
   }
   function guideCard(g) {
     const k = `<span class="k">${esc(g.who)} · ${g.stops.length} stops</span>`;
@@ -280,6 +291,53 @@
       <div style="min-width:0"><div class="who glow-pink">${wear(a.name)}</div><div class="med">${esc(a.medium)}</div>
       ${feature ? `<p>${esc(a.bio)}</p>` : ''}${a.example ? '<span class="example" style="margin-top:6px">Example</span>' : ''}</div></button>`;
 
+  /* ---------- takeovers ---------- */
+  // Paid and traded spots, always labeled: a business each week, an artist each month, and seasons (Christmas) with vendor spots.
+  let TO = { season: null, artist: null, business: null, data: null };
+  const mondayOf = ymd => addDays(ymd, -((dowOf(ymd) + 6) % 7));
+  const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  function pickTakeovers(data, keep) {
+    const month = NOW.ymd.slice(0, 7), week = mondayOf(NOW.ymd);
+    const season = (data.seasons || []).find(x => NOW.ymd >= x.start && NOW.ymd <= x.end) || null;
+    if (season) season.vendorsLive = (season.vendors || []).filter(keep).filter(v => P[v.place]);
+    const artist = (data.artists || []).filter(keep).find(x => x.month === month && artists.some(a => a.id === x.artist)) || null;
+    const business = (data.businesses || []).filter(keep).find(x => x.weekOf === week && P[x.place]) || null;
+    return { season, artist, business, data };
+  }
+  const takeoverTag = '<span class="to-tag">Takeover</span>';
+  function seasonBlock() {
+    const z = TO.season; if (!z) return '';
+    const left = Math.max(0, (z.vendorSpots || 0) - (z.vendors || []).length);
+    const banner = z.art && z.art.banner
+      ? `<img class="season-art" src="${esc(z.art.banner)}" alt="${esc(z.art.alt || z.name)}">`
+      : `<div class="season-sign"><div class="season-name">${wear(z.name, 9)}</div></div>`;
+    return `<section class="season" aria-label="${esc(z.name)}">${banner}
+      ${z.note ? `<p class="margin-note">${esc(z.note)}</p>` : ''}
+      ${z.vendorsLive.length ? `<div class="sec">Holiday vendors <span class="to-tag">Paid spots</span></div>
+        <div class="list">${z.vendorsLive.map(v => placeRow(P[v.place], v.offer)).join('')}</div>` : ''}
+      ${left ? `<p class="empty">${left} of ${z.vendorSpots} vendor spots left this season. <a href="/takeovers/#vendor">Claim one</a>.</p>` : ''}
+    </section>`;
+  }
+  function businessBlock() {
+    const b = TO.business; if (!b) return '';
+    const p = P[b.place], o = openState(p);
+    return `<div class="sec">This week's takeover ${takeoverTag}</div>
+      <button class="takeover enamel" type="button" data-place="${esc(p.id)}">${rivets}
+        <span class="name glow-lime">${wear(p.name)}</span>
+        <span class="kind">${esc(b.headline || p.sub)}</span>
+        ${b.offer ? `<span class="offer">${esc(b.offer)}</span>` : ''}
+        <span class="foot">${o ? (o.open ? '<span class="open-sign">OPEN</span>' : '<span class="closed-sign">CLOSED</span>') : ''}${p.example ? '<span class="example">Example</span>' : ''}</span>
+      </button>`;
+  }
+  function artistBlock() {
+    const t = TO.artist, a = t && artists.find(x => x.id === t.artist);
+    if (!a) { const f = artists.find(x => x.featured) || artists[0]; return f ? `<div class="sec">Someone you should know</div>${artistCard(f, true)}` : ''; }
+    const month = MONTH_NAMES[Number(t.month.slice(5, 7)) - 1];
+    return `<div class="sec">${esc(month)}'s artist takeover <span class="to-tag">Trade</span></div>
+      ${t.headline ? `<p class="margin-note" style="margin-top:0">${esc(t.headline.toLowerCase())}.</p>` : ''}
+      ${artistCard(a, true)}`;
+  }
+
   /* ---------- screens ---------- */
   function today() {
     const h = Math.floor(NOW.min / 60);
@@ -288,9 +346,9 @@
     const upcoming = todays.length ? todays : occurrences.slice(0, 4);
     const mine = occurrences.filter(o => saved.has(o.key));
     const openNow = places.filter(p => (p.type === 'food' || p.type === 'shop') && openState(p)?.open).slice(0, 4);
-    const featured = artists.find(a => a.featured) || artists[0];
     return `${heroSign()}
     ${skyBox()}
+    ${seasonBlock()}
     <div class="notice">We're just getting started, so you'll see a few <span class="example">Example</span> listings while the real ones come in. Run a business, make things or put on events? <a href="/join/">Get on the map, free</a>.</div>
     <h2 class="title glow-pink">${wear(hello)}</h2><p class="subtitle">${esc(dayLabel(NOW.ymd).replace('Today · ', ''))} · Here's what's on downtown</p>
     <p class="margin-note"><span class="k">Easton, weirdly</span>${esc(weirdToday())}</p>
@@ -300,9 +358,11 @@
       ${upcoming.length ? upcoming.map(evRow).join('') : '<p class="empty">Quiet week on the calendar so far. Wander anyway; downtown has a way of surprising you.</p>'}
     </div>
     <p style="text-align:right;margin:8px 0 0"><a href="#events" class="tag" style="text-decoration:none">See everything →</a></p>
+    ${businessBlock()}
     ${guides.length ? `<div class="sec">Make a day of it <a href="#guides">See all</a></div><div class="hcards">${guides.map(guideCard).join('')}</div>` : ''}
-    ${featured ? `<div class="sec">Someone you should know</div>${artistCard(featured, true)}` : ''}
+    ${artistBlock()}
     ${openNow.length ? `<div class="sec">Open right now <a href="#directory">Around town</a></div><div class="list">${openNow.map(placeRow).join('')}</div>` : ''}
+    <p class="empty" style="text-align:center;margin-top:26px">Want the app for a week? <a href="/takeovers/">Take it over</a>.</p>
     ${MAKERS}`;
   }
 
@@ -606,7 +666,7 @@
   if (!welcomed && !location.hash) welcome();
 
   const getJSON = f => fetch('/data/' + f, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(f); return r.json(); });
-  Promise.all(['settings.json', 'places.json', 'events.json', 'artists.json', 'guides.json'].map(getJSON)).then(([settings, pl, ev, ar, gu]) => {
+  Promise.all(['settings.json', 'places.json', 'events.json', 'artists.json', 'guides.json'].map(getJSON).concat(getJSON('takeovers.json').catch(() => null))).then(([settings, pl, ev, ar, gu, takeovers]) => {
     heroPhoto = settings.heroPhoto && settings.heroPhoto.src ? settings.heroPhoto : null;
     const keep = x => settings.showExamples || !x.example;
     places = pl.filter(keep); P = Object.fromEntries(places.map(p => [p.id, p]));
@@ -614,6 +674,8 @@
     artists = ar.filter(keep);
     guides = gu.filter(keep).filter(g => g.stops.every(s => P[s.place])); G = Object.fromEntries(guides.map(g => [g.id, g]));
     occurrences = expandEvents(14);
+    TO = pickTakeovers(takeovers || {}, keep);
+    if (TO.season && TO.season.theme) document.documentElement.dataset.season = TO.season.theme;
     if (location.hash) fromHash(); else render();
     if (location.hash === '#welcome') render();
   }).catch(() => {

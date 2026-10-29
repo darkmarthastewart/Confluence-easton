@@ -48,6 +48,17 @@ A business looks like this:
 
 Open the app with `#pick` at the end of the address (for example `https://your-site/#pick`), go to the spot on the map, and tap it. The app shows the latitude and longitude to copy into the listing.
 
+## Takeovers
+
+Listings are free. Takeovers are the one spot you can book, and the app always labels them. Everything lives in `site/data/takeovers.json`:
+
+- **Business weeks** (4 a month): add `{"weekOf": "2026-11-09", "place": "<listing id>", "headline": "...", "offer": "..."}`. `weekOf` is that week's Monday. The business's sign sits at the top of Today for the week, and its listing gets a Takeover tag.
+- **Artist months** (1 a month, a trade): add `{"month": "2026-12", "artist": "<artist id>", "headline": "...", "art": {"banner": "/photos/december.jpg", "alt": "..."}}`. With a banner, the artist's art takes over the top of Today with a credit.
+- **Seasons** (Christmas): set the dates, `vendorSpots`, and add vendors as `{"place": "<listing id>", "offer": "..."}`. During the season the neon goes red and green, snow falls, and Today gets a holiday vendors section. Your own seasonal art goes in `art.banner`.
+- **Prices**: set `prices.businessWeek` and `prices.vendorSpot` to numbers to show them on the booking page; leave them `null` to show "Ask about pricing".
+
+Requests come in through the booking page at `/takeovers/` and land in Netlify under **Forms → takeover**. Nothing is booked until you add it to the file. Approve, invoice, and add it once it's paid.
+
 ## Time of day and weather
 
 The app follows Easton's real sun. Sunrise and sunset are worked out in the app itself (NOAA's sunrise equation, good to a minute or two), so this works offline. From them it picks one of five looks, checked every minute:
@@ -62,7 +73,7 @@ The app follows Easton's real sun. Sunrise and sunset are worked out in the app 
 
 The windows are in `phaseAt()` in `site/assets/app.js`; the looks are at the end of `site/assets/app.css`.
 
-The weather on Today comes from [Open-Meteo](https://open-meteo.com/): free, no account or key, refreshed every 30 minutes. Its terms ask for credit, which the panel shows. If the weather can't load, the panel still shows the sun's arc and the next sunrise or sunset.
+The weather on Today comes from the [National Weather Service](https://www.weather.gov/): free for any use (including a business), no account or key, refreshed every 30 minutes. If the weather can't load, the panel still shows the sun's arc and the next sunrise or sunset.
 
 ## The photo at the top of Today
 

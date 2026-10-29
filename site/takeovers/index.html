@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Takeovers · Confluence Easton</title>
+<meta name="description" content="Take over Confluence Easton: a business each week, an artist each month, and holiday vendor spots.">
+<meta name="theme-color" content="#211714">
+<meta property="og:title" content="Take over Confluence Easton">
+<meta property="og:description" content="A business each week, an artist each month, and holiday vendor spots on Easton's app.">
+<meta property="og:image" content="https://confluence-easton.netlify.app/og.png">
+<meta property="og:url" content="https://confluence-easton.netlify.app/takeovers/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon-192.png">
+<link rel="preload" href="/assets/fonts/yellowtail-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/base.css">
+<style>
+.page{max-width:1080px;margin:0 auto;padding-block:calc(18px + env(safe-area-inset-top, 0px)) 72px;padding-left:max(20px, env(safe-area-inset-left, 0px));padding-right:max(20px, env(safe-area-inset-right, 0px))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.top .wordmark .script{font-size:34px}
+.top a.link{font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.16em;text-decoration:none}
+.hero{padding:44px 0 10px;max-width:760px}
+.hero .lit{font-family:var(--script);font-size:clamp(50px,9vw,88px);line-height:1.02;margin:10px 0 14px}
+.hero p{font-size:20px;margin:0;max-width:58ch}
+h2{font-family:var(--caps);font-weight:800;font-size:14px;letter-spacing:.28em;text-transform:uppercase;color:var(--rust-light);margin:46px 0 14px}
+.kinds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:820px){.kinds{grid-template-columns:minmax(0,1fr)}}
+.kind{position:relative;padding:22px 18px 18px;display:flex;flex-direction:column;gap:8px}
+.kind .name{font-family:var(--script);font-size:36px;line-height:1.05}
+.kind .how{font-family:var(--caps);font-weight:800;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust-light)}
+.kind p{margin:0;font-size:17px;color:var(--soft)}
+.kind ul{margin:0;padding-left:18px;font-size:16px;color:var(--ink)}
+.kind .price{font-family:var(--block);font-size:30px;line-height:1;margin-top:auto;padding-top:8px}
+.kind .price small{font-family:var(--body);font-size:15px;color:var(--soft)}
+.cal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 32px}
+@media (max-width:720px){.cal{grid-template-columns:minmax(0,1fr)}}
+.cal h3{font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 6px;color:var(--soft)}
+.slot{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:17px}
+.slot .when{font-weight:700;text-transform:uppercase}
+.slot .who{color:var(--muted)}
+.slot .open{font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.14em}
+.spots{font-size:18px}
+form{padding:20px;display:grid;gap:16px;margin-top:8px}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:14px;min-width:0}
+legend{font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.2em;color:var(--yellow);text-shadow:0 0 6px #FFC93C;padding:0;margin-bottom:10px;text-transform:uppercase}
+.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+@media (max-width:560px){.types{grid-template-columns:minmax(0,1fr)}}
+.types label{position:relative}
+.types input{position:absolute;opacity:0;inset:0}
+.types span{display:grid;place-items:center;min-height:46px;border:2px solid var(--line);font-family:var(--caps);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-align:center;padding:4px}
+.types input:checked+span{border-color:var(--yellow);color:var(--yellow);text-shadow:0 0 6px #FFC93C;box-shadow:0 0 6px var(--yellow-glow),inset 0 0 6px var(--yellow-glow)}
+.types input:focus-visible+span{outline:2px solid var(--yellow);outline-offset:2px}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-family:var(--caps);font-weight:800;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.field small{color:var(--muted);font-size:15px}
+.field input,.field select,.field textarea{width:100%;background:#141516;border:2px solid var(--rust-dark);padding:11px 12px;font-size:17px;color:var(--ink)}
+.field textarea{min-height:100px;resize:vertical}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:560px){.two{grid-template-columns:minmax(0,1fr)}}
+.check{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;font-size:16px}
+.check input{width:20px;height:20px;margin:2px 0 0;accent-color:#B5E35A}
+.hp{position:absolute;left:-9999px}
+form .tube-btn{justify-self:start;min-height:56px;padding:0 34px;font-size:15px}
+.faq details{border-bottom:1px solid var(--line);padding:14px 0}
+.faq summary{font-weight:700;font-size:18px;text-transform:uppercase;cursor:pointer}
+.faq p{margin:8px 0 0;color:var(--soft);max-width:64ch;font-size:17px}
+</style>
+</head>
+<body class="night">
+<div class="page">
+  <header class="top">
+    <a class="wordmark" href="/"><span class="script glow-pink">Confluence</span><span class="caps">Easton</span></a>
+    <a class="link glow-yellow" href="/">SEE THE APP →</a>
+  </header>
+
+  <section class="hero">
+    <div class="caps glow-yellow" style="font-size:12px">For Easton businesses, vendors &amp; artists</div>
+    <div class="lit glow-pink">Take over the <span class="flicker">a</span>pp.</div>
+    <p>Listings are free and always will be. Takeovers are the one spot on Confluence Easton you can book: a business each week, an artist each month, and extra vendor spots when the holidays roll in. Every takeover is labeled, so people always know what they're looking at.</p>
+  </section>
+
+  <h2>Three ways in</h2>
+  <div class="kinds">
+    <div class="kind enamel">
+      <div class="how">Business · 4 a month</div>
+      <div class="name glow-lime">Week takeover</div>
+      <p>One business owns the week, Monday to Sunday.</p>
+      <ul><li>Your sign at the top of Today, lit in neon</li><li>An offer or news, in your words</li><li>A Takeover tag on your listing and pin</li></ul>
+      <div class="price" id="price-week">Ask about pricing</div>
+    </div>
+    <div class="kind enamel">
+      <div class="how">Artist · 1 a month</div>
+      <div class="name glow-pink">Artist takeover</div>
+      <p>A trade: your graphics for a month on the front of the app.</p>
+      <ul><li>Your artwork across the top of Today</li><li>Your profile featured all month, with a credit and a link</li><li>Your work becomes part of the app's look</li></ul>
+      <div class="price">Trade <small>· no fee either way</small></div>
+    </div>
+    <div class="kind enamel" id="vendor">
+      <div class="how" id="season-how">Holiday season</div>
+      <div class="name" style="color:#FFE3E3;text-shadow:0 0 2px #FFF,0 0 7px #FF4D4D,0 0 18px #E00024">Vendor spot</div>
+      <p id="season-text">During the holidays, Today gets a vendors section. We push Christmas in these parts.</p>
+      <ul><li>Your listing in the holiday vendors list</li><li>Your holiday offer, all season</li><li>Lit in the season's colors</li></ul>
+      <div class="price" id="price-vendor">Ask about pricing</div>
+    </div>
+  </div>
+
+  <h2>What's open</h2>
+  <div class="cal">
+    <div><h3>Business weeks</h3><div id="weeks"><p class="spots" style="color:var(--soft)">Loading the calendar…</p></div></div>
+    <div><h3>Artist months</h3><div id="months"></div>
+      <h3 style="margin-top:22px">Holiday vendor spots</h3><div id="vendors" class="spots"></div></div>
+  </div>
+
+  <h2 id="form-title">Request a takeover</h2>
+  <form class="enamel" name="takeover" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="bot-field" aria-labelledby="form-title">
+    <input type="hidden" name="form-name" value="takeover">
+    <p class="hp"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+    <fieldset>
+      <legend>What kind?</legend>
+      <div class="types">
+        <label><input type="radio" name="kind" value="business-week" checked><span>Business week</span></label>
+        <label><input type="radio" name="kind" value="artist-month"><span>Artist month</span></label>
+        <label><input type="radio" name="kind" value="vendor-spot"><span>Holiday vendor</span></label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>The details</legend>
+      <div class="two">
+        <div class="field"><label for="t-name" id="t-name-l">Business name</label><input id="t-name" name="name" type="text" required maxlength="80"></div>
+        <div class="field"><label for="t-when">When</label><select id="t-when" name="when"></select><small id="t-when-s">Booked slots aren't shown.</small></div>
+      </div>
+      <div class="field"><label for="t-pitch" id="t-pitch-l">What would you show or offer?</label><textarea id="t-pitch" name="pitch" required maxlength="600"></textarea><small id="t-pitch-s">An offer, news, a launch. Write it plainly; we'll fit it to the app.</small></div>
+      <div class="field"><label for="t-web">Website, Instagram or portfolio</label><input id="t-web" name="website" type="text" maxlength="200"></div>
+    </fieldset>
+    <fieldset>
+      <legend>Just for us</legend>
+      <div class="two">
+        <div class="field"><label for="t-cname">Your name</label><input id="t-cname" name="contact_name" type="text" required maxlength="80" autocomplete="name"></div>
+        <div class="field"><label for="t-email">Email</label><input id="t-email" name="contact_email" type="email" required maxlength="120" autocomplete="email"></div>
+      </div>
+      <div class="field"><label for="t-phone">Phone</label><input id="t-phone" name="contact_phone" type="tel" maxlength="30" autocomplete="tel"><small>Optional.</small></div>
+      <label class="check"><input type="checkbox" name="agree" value="yes" required><span id="t-agree">I understand this is a request. If it's approved I'll get an invoice, and the spot is mine once it's paid. Takeovers are labeled in the app.</span></label>
+    </fieldset>
+    <button class="tube-btn" type="submit">Send my request</button>
+  </form>
+
+  <h2>Good questions</h2>
+  <div class="faq">
+    <details><summary>How do I pay?</summary><p>You don't pay to ask. We read every request, and if it's a fit you get an invoice. The spot is yours once it's paid.</p></details>
+    <details><summary>Does a takeover change my free listing?</summary><p>No. Your listing stays free and stays put. A takeover adds a spotlight on top of it for the week.</p></details>
+    <details><summary>Will people know it's a takeover?</summary><p>Yes. Every takeover carries a Takeover tag. Guides, the featured listings and the regular directory can't be bought.</p></details>
+    <details><summary>What do artists send?</summary><p>A wide piece for the top of the app (about 2400 by 1200 pixels, or a drawing we can scan), plus anything you want to lend the app that month: lettering, icons, little drawings. You keep the rights; we credit you everywhere it shows.</p></details>
+    <details><summary>Can we say anything we want?</summary><p>Almost. Keep it true and specific. No "best in town" claims, no hype words. We'll help it sound like Easton.</p></details>
+  </div>
+  <a class="makers" href="https://marthathinkstoomuch.com" target="_blank" rel="noopener"><span class="hex">DMS</span>made in Easton by Dark Martha Stewart</a>
+</div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+  const today = `${parts.year}-${parts.month}-${parts.day}`;
+  const d = ymd => { const [y,m,dd] = ymd.split('-').map(Number); return new Date(Date.UTC(y,m-1,dd)); };
+  const add = (ymd,n) => { const x = d(ymd); x.setUTCDate(x.getUTCDate()+n); return x.toISOString().slice(0,10); };
+  const monday = ymd => add(ymd, -((d(ymd).getUTCDay()+6)%7));
+  const label = ymd => { const x = d(ymd); return `${MONTHS[x.getUTCMonth()]} ${x.getUTCDate()}`; };
+  let open = { weeks: [], months: [], season: null };
+
+  Promise.all([fetch('/data/takeovers.json',{cache:'no-cache'}).then(r=>r.json()), fetch('/data/places.json',{cache:'no-cache'}).then(r=>r.json()), fetch('/data/artists.json',{cache:'no-cache'}).then(r=>r.json())])
+  .then(([t, places, artists]) => {
+    const P = Object.fromEntries(places.map(p=>[p.id,p])), A = Object.fromEntries(artists.map(a=>[a.id,a]));
+    if (t.prices && t.prices.businessWeek != null) $('#price-week').innerHTML = `$${t.prices.businessWeek}<small> · per week</small>`;
+    if (t.prices && t.prices.vendorSpot != null) $('#price-vendor').innerHTML = `$${t.prices.vendorSpot}<small> · per season</small>`;
+    // the next eight weeks
+    let w = monday(today), rows = '';
+    for (let i = 0; i < 8; i++, w = add(w, 7)) {
+      const b = (t.businesses||[]).find(x => x.weekOf === w);
+      rows += `<div class="slot"><span class="when">Week of ${label(w)}</span>${b ? `<span class="who">Booked${P[b.place] ? ' · ' + esc(P[b.place].name) : ''}${b.example ? ' (example)' : ''}</span>` : '<span class="open glow-lime">OPEN</span>'}</div>`;
+      if (!b && i > 0) open.weeks.push(w);
+    }
+    $('#weeks').innerHTML = rows;
+    // the next six months
+    const [y0, m0] = today.split('-').map(Number); rows = '';
+    for (let i = 0; i < 6; i++) {
+      const y = y0 + Math.floor((m0 - 1 + i) / 12), m = (m0 - 1 + i) % 12 + 1, key = `${y}-${String(m).padStart(2,'0')}`;
+      const a = (t.artists||[]).find(x => x.month === key);
+      rows += `<div class="slot"><span class="when">${LONG[m-1]} ${y}</span>${a ? `<span class="who">Booked${A[a.artist] ? ' · ' + esc(A[a.artist].name) : ''}${a.example ? ' (example)' : ''}</span>` : '<span class="open glow-lime">OPEN</span>'}</div>`;
+      if (!a && i > 0) open.months.push({ key, text: `${LONG[m-1]} ${y}` });
+    }
+    $('#months').innerHTML = rows;
+    // the next season with vendor spots
+    const z = (t.seasons||[]).filter(x => x.end >= today).sort((a,b) => a.start.localeCompare(b.start))[0];
+    if (z) {
+      const left = Math.max(0, (z.vendorSpots||0) - (z.vendors||[]).length);
+      $('#vendors').innerHTML = `<b>${esc(z.name)}</b>, ${label(z.start)} to ${label(z.end)}: <span class="glow-lime">${left} of ${z.vendorSpots}</span> spots left.`;
+      $('#season-how').textContent = `${z.name} · ${z.vendorSpots} spots`;
+      $('#season-text').textContent = `${label(z.start)} to ${label(z.end)}, Today gets a holiday vendors section. We push Christmas in these parts.`;
+      if (left) open.season = z;
+    } else $('#vendors').textContent = 'No holiday season on the calendar right now.';
+    fillWhen();
+  }).catch(() => { $('#weeks').innerHTML = '<p class="spots">The calendar didn\'t load. You can still send a request below.</p>'; fillWhen(); });
+
+  const form = document.forms.takeover;
+  function fillWhen() {
+    const k = form.kind.value, sel = $('#t-when');
+    let opts = [];
+    if (k === 'business-week') opts = open.weeks.map(w => [w, `Week of ${label(w)}`]);
+    if (k === 'artist-month') opts = open.months.map(m => [m.key, m.text]);
+    if (k === 'vendor-spot') opts = open.season ? [[open.season.id, open.season.name]] : [];
+    sel.innerHTML = (opts.length ? opts : [['', 'Any time that works']]).map(([v,t]) => `<option value="${esc(v)}">${esc(t)}</option>`).join('');
+    const artist = k === 'artist-month';
+    $('#t-name-l').textContent = artist ? 'Artist name' : 'Business name';
+    $('#t-pitch-l').textContent = artist ? 'What would you make for the app?' : k === 'vendor-spot' ? 'What will you offer this season?' : 'What would you show or offer?';
+    $('#t-pitch-s').textContent = artist ? 'A sketch of the idea is plenty. Link to your work below.' : 'An offer, news, a launch. Write it plainly; we\'ll fit it to the app.';
+    $('#t-agree').textContent = artist ? 'I understand this is a trade: my graphics for a month on the app, with credit. No fee either way. I keep the rights.' : 'I understand this is a request. If it\'s approved I\'ll get an invoice, and the spot is mine once it\'s paid. Takeovers are labeled in the app.';
+  }
+  form.addEventListener('change', e => { if (e.target.name === 'kind') fillWhen(); });
+  const pre = location.hash.slice(1);
+  if (pre === 'vendor') { form.kind.value = 'vendor-spot'; }
+  if (pre === 'artist') { form.kind.value = 'artist-month'; }
+})();
+</script>
+<script src="/assets/ballpoint.js" defer></script>
+</body>
+</html>
