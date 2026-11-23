@@ -98,10 +98,10 @@ Real places (Centre Square, the State Theatre, the Easton Public Market and the 
 ## Notes
 
 - Map tiles come from OpenStreetMap, which is fine for a launch. If the app gets heavy traffic, switch to a tile provider with a free tier (such as MapTiler or Stadia Maps) by changing the one `L.tileLayer` line in `site/assets/app.js`.
-- The map library (Leaflet 1.9.4) and fonts (Bebas Neue, League Spartan and Barlow Condensed under the SIL Open Font License, and Yellowtail under the Apache License 2.0; each license file sits beside the fonts) are stored in the repository, so the site doesn't depend on outside services to load.
+- The map library (Leaflet 1.9.4) and fonts (Grandstander, Patrick Hand, Bebas Neue, League Spartan and Barlow Condensed under the SIL Open Font License, and Yellowtail and Permanent Marker under the Apache License 2.0; each license file sits beside the fonts) are stored in the repository, so the site doesn't depend on outside services to load.
 
 ## The look
 
-The app is styled as Easton's old signs after dark: rusted enamel, night brick, and neon tubes that are mostly lit, with a few burned out or flickering. The materials and neon colors live in `site/assets/base.css`; the app's layout is in `site/assets/app.css`. Headlines get their worn tubes from the `wear()` function in `site/assets/app.js`, which picks the letters from the words themselves, so a given word always wears the same way. Flickering stops for anyone whose device asks for reduced motion.
+The app is the Easton Supper Club's flyers taped to a brick wall under neon. Content sits on torn paper scraps (cream, wine, navy and lined paper) with a strip of tape, in the supper club's fonts: Grandstander for headings (standing in for More Sugar) and Patrick Hand for text (standing in for FF Providence Sans). The sign at the top of Today is CONFLUENCE in the supper club's letters, lit as red neon after dark and outlined red by day. Text on paper uses the supper club's inks; neon only glows on the brick. The paper layer is at the end of `site/assets/base.css`; the app's version is at the end of `site/assets/app.css`.
 
 Dark Martha Stewart's brand shows up in the look, never as extra copy: the ballpoint ink trail (`site/assets/ballpoint.js`, the same one as marthathinkstoomuch.com), her lime for saved things, the research assistant drawn in chalk on the Day & Night screen, and a small hexagon maker's mark. Permanent Marker is under the Apache License 2.0.

@@ -1,10 +1,13 @@
-/* Confluence Easton: shared tokens, fonts and the worn-neon materials (night brick, rusted enamel, neon tubes).
-   One deliberate dark look, so there is no light theme. */
+/* Confluence Easton: shared tokens, fonts and materials. The look is the Easton Supper Club's flyers taped to a
+   brick wall under neon: content on torn paper scraps in the supper club's fonts and inks, signs lit at night. */
 @font-face{font-family:"Yellowtail";src:url(fonts/yellowtail-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Bebas Neue";src:url(fonts/bebas-neue-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"League Spartan";src:url(fonts/league-spartan-latin-600-normal.woff2) format("woff2");font-weight:500 600;font-display:swap}
 @font-face{font-family:"League Spartan";src:url(fonts/league-spartan-latin-800-normal.woff2) format("woff2");font-weight:700 800;font-display:swap}
 @font-face{font-family:"Permanent Marker";src:url(fonts/permanent-marker-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Grandstander";src:url(fonts/grandstander-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Grandstander";src:url(fonts/grandstander-latin-900-normal.woff2) format("woff2");font-weight:800 900;font-display:swap}
+@font-face{font-family:"Patrick Hand";src:url(fonts/patrick-hand-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-600-normal.woff2) format("woff2");font-weight:500 600;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-700-normal.woff2) format("woff2");font-weight:700 800;font-display:swap}
@@ -23,16 +26,22 @@
   /* Dark Martha Stewart's own kit, spoken softly: her lime, her marker red */
   --lime:#E4FFB0; --lime-glow:#8DC21F; --marker:#FF3B4E;
   --f-marker:"Permanent Marker", "Marker Felt", "Comic Sans MS", cursive;
-  --script:"Yellowtail", "Brush Script MT", cursive;
-  --block:"Bebas Neue", Impact, "Arial Narrow", sans-serif;
-  --caps:"League Spartan", "Arial Black", Arial, sans-serif;
-  --body:"Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  /* the supper club's type: Grandstander stands in for More Sugar, Patrick Hand for FF Providence Sans */
+  --head:"Grandstander", "Arial Rounded MT Bold", "Comic Sans MS", sans-serif;
+  --hand:"Patrick Hand", "Comic Sans MS", "Marker Felt", cursive;
+  --script:var(--head);
+  --block:var(--head);
+  --caps:var(--head);
+  --body:var(--hand);
+  /* the supper club's paper and inks */
+  --paper:#FBF8F1; --paper-lined:#F6EFDF; --paper-ink:#1E1A18; --paper-muted:#5E554E;
+  --wine:#B0124E; --sc-red:#D8201C; --navy:#26304F; --tape:rgba(235,222,190,.88);
   color-scheme:dark;
 }
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--brick);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.4}
+body{margin:0;background:var(--brick);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.4}
 img{max-width:100%}
 [hidden]{display:none!important}
 a{color:var(--pink)}
@@ -98,3 +107,38 @@ button,input,select,textarea{font:inherit;color:inherit}
 .makers:hover{color:var(--soft)}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- the supper club layer ----------
+   Anything on .enamel, .tin or .shoppe is a scrap of paper taped to the brick: a torn edge, a strip of tape, and its
+   own ink, so text printed on it is dark. Neon on the brick stays neon; neon printed on paper turns into the
+   supper club's wine, red and navy. */
+.enamel,.tin,.shoppe{position:relative;isolation:isolate;background:none;border:0;box-shadow:none;--paper-bg:var(--paper);
+  --ink:var(--paper-ink);--soft:var(--paper-muted);--muted:#7A6F66;--line:rgba(30,26,24,.16);--dead:#B5ABA2;--dead-line:rgba(30,26,24,.3);
+  color:var(--ink);filter:drop-shadow(3px 5px 0 rgba(0,0,0,.32))}
+.enamel::before,.tin::before,.shoppe::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--paper-bg);clip-path:polygon(0.0% 0.5%,4.2% 0.2%,8.3% 0.9%,12.5% 0.1%,16.7% 0.8%,20.8% 0.5%,25.0% 0.1%,29.2% 0.7%,33.3% 0.1%,37.5% 0.6%,41.7% 0.1%,45.8% 0.1%,50.0% 0.6%,54.2% 1.2%,58.3% 0.2%,62.5% 0.3%,66.7% 0.9%,70.8% 1.3%,75.0% 0.8%,79.2% 0.6%,83.3% 1.4%,87.5% 0.1%,91.7% 1.2%,95.8% 0.4%,100.0% 0.2%,99.9% 4.2%,99.8% 8.3%,99.4% 12.5%,99.9% 16.7%,99.6% 20.8%,99.6% 25.0%,99.7% 29.2%,99.6% 33.3%,100.0% 37.5%,100.0% 41.7%,99.9% 45.8%,99.5% 50.0%,99.7% 54.2%,99.8% 58.3%,99.6% 62.5%,99.7% 66.7%,99.8% 70.8%,99.4% 75.0%,99.5% 79.2%,99.8% 83.3%,99.6% 87.5%,99.6% 91.7%,99.4% 95.8%,100.0% 99.0%,95.8% 99.6%,91.7% 98.6%,87.5% 99.8%,83.3% 99.4%,79.2% 98.9%,75.0% 99.8%,70.8% 99.3%,66.7% 99.9%,62.5% 99.1%,58.3% 98.9%,54.2% 99.2%,50.0% 98.8%,45.8% 99.6%,41.7% 99.0%,37.5% 99.2%,33.3% 99.2%,29.2% 99.4%,25.0% 98.8%,20.8% 98.7%,16.7% 99.3%,12.5% 99.1%,8.3% 99.9%,4.2% 99.0%,0.0% 99.1%,0.7% 95.8%,0.6% 91.7%,0.2% 87.5%,0.3% 83.3%,0.5% 79.2%,0.0% 75.0%,0.3% 70.8%,0.1% 66.7%,0.1% 62.5%,0.0% 58.3%,0.5% 54.2%,0.1% 50.0%,0.2% 45.8%,0.3% 41.7%,0.6% 37.5%,0.1% 33.3%,0.3% 29.2%,0.4% 25.0%,0.6% 20.8%,0.6% 16.7%,0.6% 12.5%,0.2% 8.3%,0.3% 4.2%)}
+.enamel::after,.tin::after,.shoppe::after{content:"";position:absolute;width:84px;height:22px;left:50%;margin-left:-42px;top:-10px;background:var(--tape);transform:rotate(-3deg);box-shadow:0 1px 2px rgba(0,0,0,.2);z-index:2;pointer-events:none}
+.tin{--paper-bg:var(--navy);--ink:#FBF8F1;--soft:#D9DCEA;--muted:#C4C8DB;--dead:rgba(255,255,255,.4)}
+.shoppe{--paper-bg:var(--paper-lined) repeating-linear-gradient(180deg,transparent 0 27px,rgba(38,48,79,.14) 27px 28px)}
+:root :is(.enamel,.tin,.shoppe) .glow-pink{color:var(--wine);text-shadow:none}
+:root :is(.enamel,.tin,.shoppe) .glow-yellow{color:var(--sc-red);text-shadow:none}
+:root :is(.enamel,.tin,.shoppe) .glow-red{color:var(--wine);text-shadow:none}
+:root :is(.enamel,.tin,.shoppe) .glow-teal{color:var(--navy);text-shadow:none}
+:root :is(.enamel,.tin,.shoppe) .glow-lime{color:#4E7F0E;text-shadow:none}
+:root .tin :is(.glow-pink,.glow-yellow,.glow-red,.glow-teal,.glow-lime){color:#FBF8F1}
+:root :is(.enamel,.tin,.shoppe) .dead{color:var(--dead)!important}
+:is(.enamel,.tin,.shoppe) .flicker,:is(.enamel,.tin,.shoppe) .flicker2{animation:none}
+:is(.enamel,.tin,.shoppe) a{color:var(--wine)}
+:is(.enamel,.tin,.shoppe) .rivet{display:none}
+:is(.enamel,.tin,.shoppe) .open-sign{color:var(--sc-red);border-color:var(--sc-red);box-shadow:none;text-shadow:none;transform:rotate(-3deg)}
+:is(.enamel,.tin,.shoppe) .closed-sign{color:var(--dead);border-color:var(--dead-line)}
+:is(.enamel,.tin,.shoppe) .example{border-color:var(--paper-muted);color:var(--paper-muted)}
+:is(.enamel,.tin,.shoppe) .tube-btn{background:var(--wine);border:2px solid var(--paper-ink);border-radius:10px;color:#FBF8F1;box-shadow:3px 3px 0 var(--paper-ink);text-shadow:none}
+:is(.enamel,.tin,.shoppe) .tube-btn.off{background:transparent;color:var(--paper-ink)}
+:is(.enamel,.tin,.shoppe) :is(input,select,textarea){background:#FFFDF8!important;color:var(--paper-ink)!important;border-color:rgba(30,26,24,.45)!important}
+:is(.enamel,.tin,.shoppe) :is(input,textarea)::placeholder{color:#9A9088!important}
+.rusttag{background:var(--tape);color:var(--paper-ink);box-shadow:0 1px 2px rgba(0,0,0,.25);font-family:var(--head);font-weight:900;letter-spacing:.12em;transform:rotate(-2deg)}
+.plaque{background:var(--navy);background-image:none;border:2px solid var(--paper-ink);color:#FBF8F1;font-family:var(--head);font-weight:900;font-size:19px}
+:root .plaque:is(.glow-pink,.glow-yellow,.glow-red,.glow-teal,.glow-lime){color:#FBF8F1;text-shadow:none}
+:root .plaque.dead{background:#D9D2C8;color:#8A817C!important}
+.wordmark .script{font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:.01em;color:#FF6B6B;-webkit-text-stroke:1px #FFE3E3;text-shadow:0 0 4px #FF2A3A,0 0 12px #D8201C}
+.wordmark .caps{font-weight:700}

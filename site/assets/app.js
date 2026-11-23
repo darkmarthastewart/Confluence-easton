@@ -258,7 +258,7 @@
   }
   function placeRow(p, offer) {
     const o = openState(p);
-    const sub = offer || (p.type === 'creative' && p.tags ? p.tags.join(' · ') : p.sub + (p.price ? ' · ' + p.price : ''));
+    const sub = (typeof offer === 'string' && offer) || (p.type === 'creative' && p.tags ? p.tags.join(' · ') : p.sub + (p.price ? ' · ' + p.price : ''));
     const lit = !o || o.open;
     const sign = o ? (o.open ? '<span class="open-sign">OPEN</span>' : '<span class="closed-sign">CLOSED</span>') : '';
     return `<button class="row place" type="button" data-place="${esc(p.id)}">${plaque(p, lit)}

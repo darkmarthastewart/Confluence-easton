@@ -238,3 +238,83 @@ html[data-season="christmas"] .app::after{content:"";position:absolute;inset:0;p
   background-size:360px 220px;animation:snow 14s linear infinite}
 @keyframes snow{to{background-position:40px 220px}}
 html[data-season="christmas"][data-phase="day"] .app::after{opacity:.3}
+
+/* ---------- the supper club layer (app) ----------
+   Headings in the supper club's chunky letters; the sign at the top is CONFLUENCE as red neon at night and
+   the supper club's outlined red letters by day; lists and boards are flyers taped to the brick. */
+.title{font-family:var(--head);font-weight:900;font-size:34px;line-height:1.05;letter-spacing:-.01em}
+.sec{font-family:var(--head);font-weight:900;font-size:13px;letter-spacing:.16em;color:#E9C9A8}
+.sec a{font-family:var(--head);font-weight:700}
+.tab{font-family:var(--head);font-weight:700;font-size:12px;letter-spacing:.08em}
+.tab[aria-current="page"]{font-weight:900;color:#FFD0D0;text-shadow:0 0 6px #FF3F5A,0 0 14px #D8201C}
+html[data-phase="day"] .tab[aria-current="page"]{color:#FBF8F1;text-shadow:none;text-decoration-color:var(--sc-red);text-decoration-line:underline;text-decoration-thickness:3px}
+.subtitle{font-family:var(--hand);text-transform:none;letter-spacing:0;font-size:17px}
+.lede{font-family:var(--hand)}
+.getlisted,.planbtn{font-family:var(--head);font-weight:900}
+
+/* the sign */
+.hero .hero-script{font-family:var(--head);font-weight:900;font-size:56px;line-height:1;text-transform:uppercase;letter-spacing:-.01em;transform:rotate(-4deg);
+  color:#FF5A5A;-webkit-text-stroke:2px #FFE3E3;text-shadow:0 0 4px #FF2A3A,0 0 14px #FF1F3A,0 0 30px rgba(216,32,28,.8)}
+html[data-phase="dawn"] .hero .hero-script,html[data-phase="golden"] .hero .hero-script{text-shadow:0 0 3px #FF2A3A,0 0 9px rgba(216,32,28,.6)}
+html[data-phase="day"] .hero .hero-script{color:var(--sc-red);-webkit-text-stroke:2px var(--paper-ink);text-shadow:4px 4px 0 var(--paper-ink)}
+.hero-place{font-family:var(--head);font-weight:700;color:#E9C9A8;margin-top:10px}
+
+/* flyers: boards and lists on paper, each at its own slight angle */
+.board{transform:rotate(1deg);padding:16px 16px 8px}
+.board-head{font-family:var(--head);font-weight:900;font-size:22px;letter-spacing:.02em}
+.skybox{background-image:none;transform:rotate(-1.2deg)}
+.skybox svg path[d^="M82"]{fill:var(--navy)}
+.screen > .list{position:relative;isolation:isolate;margin-top:8px;padding:6px 14px;--ink:var(--paper-ink);--soft:var(--paper-muted);--muted:#7A6F66;--line:rgba(30,26,24,.16);--dead:#B5ABA2;--dead-line:rgba(30,26,24,.3);color:var(--ink);filter:drop-shadow(3px 5px 0 rgba(0,0,0,.32))}
+.screen > .list::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--paper-lined) repeating-linear-gradient(180deg,transparent 0 33px,rgba(38,48,79,.12) 33px 34px)}
+:root .screen > .list :is(.glow-pink,.glow-red){color:var(--wine);text-shadow:none}
+:root .screen > .list .glow-yellow{color:var(--sc-red);text-shadow:none}
+:root .screen > .list .glow-teal{color:var(--navy);text-shadow:none}
+:root .screen > .list .glow-lime{color:#4E7F0E;text-shadow:none}
+.screen > .list .open-sign{color:var(--sc-red);border-color:var(--sc-red);box-shadow:none;text-shadow:none;transform:rotate(-3deg)}
+.screen > .list .closed-sign{color:var(--dead);border-color:var(--dead-line)}
+.screen > .list .example{border-color:var(--paper-muted);color:var(--paper-muted)}
+.row-title{font-family:var(--hand);text-transform:none;font-weight:400;font-size:20px}
+.time{font-family:var(--head);font-weight:900;font-size:16px;letter-spacing:0}
+.time small{font-family:var(--hand);font-size:13px}
+.row{grid-template-columns:72px minmax(0,1fr) auto}
+.tag{font-family:var(--head);font-weight:900}
+.seg button{font-family:var(--head);font-weight:900}
+.seg .enamel::after,.seg button::after{display:none}
+.chip{font-family:var(--head);font-weight:900}
+
+/* guide cards: wine, navy and lined-paper flyers */
+.gcard{filter:drop-shadow(3px 5px 0 rgba(0,0,0,.32))}
+.gcard.enamel{--paper-bg:var(--wine);--ink:#FBF8F1;--soft:#F3D9E2;--muted:#F3D9E2;--dead:rgba(255,255,255,.45)}
+:root .gcard.enamel :is(.glow-pink,.glow-yellow){color:#FBF8F1}
+.gcard .k{color:var(--muted)}
+.gcard .t.script,.gcard .t.capsy,.gcard .t.block{font-family:var(--head);font-weight:900;font-size:25px;line-height:1.02;text-transform:none;letter-spacing:0}
+.gcard .t.capsy{color:var(--wine)}
+.gcard .m{color:var(--soft)}
+.hcards .gcard:nth-child(odd),.gridguides .gcard:nth-child(4n+1),.gridguides .gcard:nth-child(4n+4){transform:rotate(-1.6deg)}
+.hcards .gcard:nth-child(even),.gridguides .gcard:nth-child(4n+2),.gridguides .gcard:nth-child(4n+3){transform:rotate(1.4deg)}
+.hcards{padding-top:14px}
+.gridguides{gap:18px 14px;padding-top:10px}
+
+/* everything else that used the neon script */
+.signboard .name{font-family:var(--head);font-weight:900;font-size:36px;line-height:1.05}
+.signboard .kind{font-family:var(--head);font-weight:700}
+.guide-head h2{font-family:var(--head);font-weight:900;font-size:46px;line-height:1.02}
+.takeover .name{font-family:var(--head);font-weight:900;font-size:34px}
+.takeover .kind{font-family:var(--head);font-weight:700}
+.season-name{font-family:var(--head);font-weight:900;font-size:36px}
+.mapcard h4{font-family:var(--head);font-weight:900;font-size:24px}
+.routebar b{font-family:var(--head);font-weight:900;font-size:22px}
+.artist .who{font-family:var(--head);font-weight:900;font-size:26px}
+.feature .name{font-family:var(--head);font-weight:900;font-size:22px}
+.timeline .stop{font-family:var(--hand);text-transform:none;font-size:21px}
+.welcome .greet{font-family:var(--head);font-weight:900;font-size:44px}
+.welcome .motto{font-family:var(--hand);font-size:24px}
+.sheet{transform:none}
+.sheet::after{display:none}
+.mapcard::after{display:none}
+
+.gcard.tin{color:#FBF8F1}
+:root .gcard.tin :is(.k,.m){color:#D9DCEA}
+:root .gcard.tin .t{color:#FBF8F1}
+:root .seg button[aria-pressed="true"]{color:#FBF8F1;box-shadow:none;--paper-bg:var(--wine)}
+html[data-phase="day"] .wordmark .script{color:var(--sc-red);-webkit-text-stroke:1px var(--paper-ink);text-shadow:2px 2px 0 var(--paper-ink)}
