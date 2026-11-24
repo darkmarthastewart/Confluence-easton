@@ -95,9 +95,9 @@ The top of the Today screen shows a real photo of an Easton sign, with the neon 
 
 ## Example content
 
-Everything marked `"example": true` is sample content to show how the app works. When enough real listings are in, set `"showExamples": false` in `site/data/settings.json` and every example disappears at once, including any guide that relied on one.
+The businesses, guides and events are real: the businesses come from the downtown directory, the guides stop only at real places, and the only events are the farmers' market's real dates. What's still an example: the featured artists and the artist takeovers (marked `"example": true`), until real artists sign up. Set `"showExamples": false` in `site/data/settings.json` to hide them.
 
-Real places (Centre Square, the State Theatre, the Easton Public Market and the other landmarks) are not examples. Pins marked `"approx": true` were placed from street addresses and should be checked with `#pick` before launch. The Public Market's hours came from the City of Easton's website; confirm them with the market.
+Guide notes stay plain on purpose: they say what to do at a stop, never claim anything about a business (a dish, a table, opening times) that hasn't been confirmed with it.
 
 ## Notes
 

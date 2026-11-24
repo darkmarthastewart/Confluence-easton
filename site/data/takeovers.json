@@ -23,23 +23,7 @@
         "banner": "",
         "alt": ""
       },
-      "vendors": [
-        {
-          "example": true,
-          "place": "kite",
-          "offer": "Wooden ornaments, hand-painted downtown."
-        },
-        {
-          "example": true,
-          "place": "ironore",
-          "offer": "Gift-wrapped local history, free."
-        },
-        {
-          "example": true,
-          "place": "lantern",
-          "offer": "Gingerbread rowhouses, Saturdays only."
-        }
-      ]
+      "vendors": []
     }
   ],
   "artists": [
@@ -64,20 +48,5 @@
       }
     }
   ],
-  "businesses": [
-    {
-      "example": true,
-      "weekOf": "2026-10-26",
-      "place": "lowbridge",
-      "headline": "Low Bridge lights up the week",
-      "offer": "Show this screen for a free zero-proof flight, Thursday through Sunday."
-    },
-    {
-      "example": true,
-      "weekOf": "2026-11-02",
-      "place": "kindling",
-      "headline": "Kindling fires up the week",
-      "offer": "Kids eat free on Tuesdays with a grown-up's pie."
-    }
-  ]
+  "businesses": []
 }
