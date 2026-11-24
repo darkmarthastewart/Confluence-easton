@@ -13,7 +13,8 @@
     food: { label: 'Food & drink', glow: 'pink', pin: '#FF5C9A' },
     shop: { label: 'Shops', glow: 'yellow', pin: '#FFC93C' },
     creative: { label: 'Creative', glow: 'teal', pin: '#3FE0CF' },
-    outdoors: { label: 'Outdoors', glow: 'teal', pin: '#7FF5E6' }
+    outdoors: { label: 'Outdoors', glow: 'teal', pin: '#7FF5E6' },
+    service: { label: 'Services', glow: 'teal', pin: '#9FB4FF' }
   };
   const TABS = { today: 'Today', events: 'Events', map: 'Map', directory: 'Town', guides: 'Day/Night' };
 
@@ -372,10 +373,10 @@
     const none = '<p class="empty">Nobody by that name yet. Try another word.</p>';
     let body = '';
     if (S.seg === 'businesses') {
-      const cats = [['all', 'All'], ['food', 'Food & drink'], ['shop', 'Shops'], ['landmark', 'Landmarks'], ['open', 'Open now']];
-      const list = places.filter(p => ['food', 'shop', 'landmark', 'outdoors'].includes(p.type) &&
+      const cats = [['all', 'All'], ['food', 'Food & drink'], ['shop', 'Shops'], ['service', 'Services'], ['landmark', 'Landmarks'], ['open', 'Open now']];
+      const list = places.filter(p => ['food', 'shop', 'service', 'landmark', 'outdoors'].includes(p.type) &&
         (S.dirCat === 'all' || (S.dirCat === 'open' ? openState(p)?.open : S.dirCat === 'landmark' ? (p.type === 'landmark' || p.type === 'outdoors') : p.type === S.dirCat)) &&
-        match(p.name, p.sub, p.blurb));
+        match(p.name, p.sub, p.blurb)).sort((a, b) => a.name.localeCompare(b.name));
       body = `<div class="chips">${cats.map(([k, l]) => `<button class="chip" type="button" data-dircat="${k}" aria-pressed="${S.dirCat === k}">${l}</button>`).join('')}</div>
         <div class="list">${list.length ? list.map(placeRow).join('') : none}</div>`;
     } else if (S.seg === 'creatives') {
@@ -390,6 +391,7 @@
       <div class="seg" role="group" aria-label="Directory section">${segs.map(([k, l]) => `<button class="enamel" type="button" data-seg="${k}" aria-pressed="${S.seg === k}">${l.toUpperCase()}</button>`).join('')}</div>
       <input class="search" id="dirsearch" type="search" placeholder="${ph}" value="${esc(S.q)}" aria-label="${ph}">
       ${body}
+      ${S.seg === 'businesses' ? '<p class="empty" style="font-size:15px">Downtown business listings come from the Easton Main Street Initiative\'s <a href="https://www.shopdowntowneaston.com/" target="_blank" rel="noopener">Shop Downtown Easton</a> directory.</p>' : ''}
       <p class="empty">Someone missing? <a href="/join/">Add a listing, free</a>, or send them the link.</p>`;
   }
 
@@ -435,7 +437,7 @@
   function renderMap(fit) {
     ensureMap();
     const route = S.route && G[S.route];
-    const filters = [['all', 'All'], ['landmark', 'Landmarks'], ['food', 'Food'], ['shop', 'Shops'], ['creative', 'Creative'], ['outdoors', 'Outdoors']];
+    const filters = [['all', 'All'], ['food', 'Food'], ['shop', 'Shops'], ['service', 'Services'], ['landmark', 'Landmarks'], ['creative', 'Creative'], ['outdoors', 'Outdoors']];
     $('#mapbar').innerHTML = route
       ? `<div class="routebar"><b class="glow-pink">${wear(route.title)}</b><button class="tube-btn off" style="min-height:38px;padding:0 14px;font-size:11px" type="button" id="clearroute">Clear route</button></div>`
       : `<div class="chips">${filters.map(([k, l]) => `<button class="chip" type="button" data-mapcat="${k}" aria-pressed="${S.mapCat === k}">${l}</button>`).join('')}</div>`;
@@ -500,7 +502,7 @@
       ${p.photo ? `<img src="${esc(p.photo)}" alt="" style="width:100%;border:3px solid var(--rust-dark);margin-bottom:12px">` : ''}
       ${o ? `<div class="statusline">${o.open ? '<span class="open-sign">OPEN</span>' : '<span class="closed-sign">CLOSED</span>'}<span class="tag">${esc(o.txt.toUpperCase())}${p.price ? ' · ' + p.price : ''}</span></div>` : ''}
       ${p.example ? '<p style="margin:12px 0 0"><span class="example">Example listing</span></p>' : ''}
-      <p class="blurb">${esc(p.blurb)}</p>
+      ${p.blurb ? `<p class="blurb">${esc(p.blurb)}</p>` : ''}
       <dl class="meta">${p.addr ? `<dt>Address</dt><dd>${esc(shortAddr(p.addr))}</dd>` : ''}
         ${p.hours ? `<dt>Hours</dt><dd>${hoursText(p)}</dd>` : ''}
         ${p.tags ? `<dt>Offers</dt><dd>${esc(p.tags.join(', '))}</dd>` : ''}

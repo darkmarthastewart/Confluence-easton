@@ -318,3 +318,6 @@ html[data-phase="day"] .hero .hero-script{color:var(--sc-red);-webkit-text-strok
 :root .gcard.tin .t{color:#FBF8F1}
 :root .seg button[aria-pressed="true"]{color:#FBF8F1;box-shadow:none;--paper-bg:var(--wine)}
 html[data-phase="day"] .wordmark .script{color:var(--sc-red);-webkit-text-stroke:1px var(--paper-ink);text-shadow:2px 2px 0 var(--paper-ink)}
+:root .screen > .list .plaque,:root .enamel .plaque{color:#FBF8F1;text-shadow:none}
+:root .screen > .list .plaque.dead,:root .enamel .plaque.dead{color:#8A817C}
+:root .enamel .meta a{color:var(--wine)}

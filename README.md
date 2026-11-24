@@ -19,6 +19,10 @@ There is no build step. Netlify publishes the `site/` folder as is.
 3. Get an email for every sign-up: **Forms → Form notifications → Add notification → Email notification**.
 4. Optional: add your domain under **Domain management**.
 
+## Downtown business listings
+
+The real downtown businesses (about 190) come from the Easton Main Street Initiative's [Shop Downtown Easton](https://www.shopdowntowneaston.com/) directory: name, category, address, phone, website and map location. Their written descriptions aren't copied. Each of those listings carries `"source": "shopdowntowneaston"` in `site/data/places.json`, and the directory credits the source. The directory has no hours, so these listings show no OPEN sign until a business sends its hours through the sign-up form.
+
 ## Turning a sign-up into a listing
 
 Sign-ups arrive in Netlify under **Forms → listing**, with any photo attached. Nothing goes live automatically. You check each one first, then add it to a file in `site/data/`:
