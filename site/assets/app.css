@@ -154,7 +154,7 @@ body{background:#120C0A}
 .sheet h2.title{margin-top:0}
 
 /* welcome */
-.welcome{position:absolute;inset:0;z-index:2000;background-color:var(--brick);display:flex;flex-direction:column;align-items:center;text-align:center;overflow-y:auto;padding-block:calc(40px + env(safe-area-inset-top, 0px)) calc(28px + env(safe-area-inset-bottom, 0px));padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));background-image:radial-gradient(ellipse 300px 220px at 50% 300px,rgba(196,32,32,.16),transparent 70%),repeating-linear-gradient(0deg,var(--mortar) 0 2px,transparent 2px 24px),repeating-linear-gradient(90deg,rgba(0,0,0,.38) 0 2px,transparent 2px 56px)}
+.welcome{position:absolute;inset:0;z-index:2000;background-color:var(--brick);display:flex;flex-direction:column;align-items:center;text-align:center;overflow-y:auto;padding-block:calc(40px + env(safe-area-inset-top, 0px)) calc(28px + env(safe-area-inset-bottom, 0px));padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));background-image:radial-gradient(ellipse 300px 220px at 50% 300px,rgba(196,32,32,.16),transparent 70%),linear-gradient(var(--shade),var(--shade)),url(/img/brick.png);background-size:auto,auto,240px 180px}
 .welcome .forks{font-family:var(--caps);font-weight:600;font-size:12px;letter-spacing:.3em;color:var(--muted);margin-top:24px}
 .welcome .greet{font-family:var(--script);font-size:54px;line-height:1.1;margin-top:14px}
 .welcome .letters{position:relative;width:100%;max-width:400px;margin-top:4px}
@@ -170,10 +170,10 @@ body{background:#120C0A}
 /* ---------- time of day ----------
    The app follows Easton's real sun. The signs are off by day, warm up at golden hour, burn at blue hour and night,
    and fade at dawn. OPEN signs stay lit whenever a place is open, like a real shop window. */
-html[data-phase="dawn"]{--brick:#3A2A2C;--mortar:rgba(0,0,0,.38);--sky:linear-gradient(180deg,rgba(255,170,190,.30),rgba(140,170,220,.16) 240px,transparent 520px)}
-html[data-phase="day"]{--brick:#5A3B30;--mortar:rgba(0,0,0,.30);--sky:linear-gradient(180deg,rgba(255,226,170,.22),rgba(255,226,170,.06) 300px,transparent 560px)}
-html[data-phase="golden"]{--brick:#4A2A22;--mortar:rgba(0,0,0,.36);--sky:linear-gradient(180deg,rgba(255,140,60,.34),rgba(255,90,60,.12) 280px,transparent 560px)}
-html[data-phase="blue"]{--brick:#1E1820;--mortar:rgba(0,0,0,.45);--sky:linear-gradient(180deg,rgba(60,80,170,.42),rgba(60,80,170,.12) 280px,transparent 560px)}
+html[data-phase="dawn"]{--shade:rgba(34,20,28,.6);--brick:#3A2A2C;--mortar:rgba(0,0,0,.38);--sky:linear-gradient(180deg,rgba(255,170,190,.30),rgba(140,170,220,.16) 240px,transparent 520px)}
+html[data-phase="day"]{--shade:rgba(30,12,8,.3);--brick:#5A3B30;--mortar:rgba(0,0,0,.30);--sky:linear-gradient(180deg,rgba(255,226,170,.22),rgba(255,226,170,.06) 300px,transparent 560px)}
+html[data-phase="golden"]{--shade:rgba(44,14,6,.5);--brick:#4A2A22;--mortar:rgba(0,0,0,.36);--sky:linear-gradient(180deg,rgba(255,140,60,.34),rgba(255,90,60,.12) 280px,transparent 560px)}
+html[data-phase="blue"]{--shade:rgba(12,10,24,.74);--brick:#1E1820;--mortar:rgba(0,0,0,.45);--sky:linear-gradient(180deg,rgba(60,80,170,.42),rgba(60,80,170,.12) 280px,transparent 560px)}
 html[data-phase="night"]{--sky:radial-gradient(ellipse 340px 200px at 50% 90px,rgba(196,32,32,.14),transparent 70%)}
 body{transition:background-color .6s}
 
@@ -336,3 +336,7 @@ body{font-size:20px}
 .notice{font-size:17px}
 .meta{font-size:19px}
 .time small{font-size:14px}
+
+/* by day the brick is bright, so light text on the wall gets a soft shadow to stay readable */
+:is(html[data-phase="day"],html[data-phase="golden"],html[data-phase="dawn"]) :is(.title,.subtitle,.lede,.sec,.sec a,.notice,.empty,.backlink,.facts span,.guide-head p,.tag,.getlisted,.planbtn,.tab){text-shadow:0 1px 3px rgba(20,8,4,.85),0 0 1px rgba(20,8,4,.9)}
+:is(html[data-phase="day"],html[data-phase="golden"],html[data-phase="dawn"]) :is(.notice,.planbtn,.facts span){background:rgba(30,12,8,.55)}

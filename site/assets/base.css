@@ -15,6 +15,7 @@
 :root{
   --brick:#211714; --mortar:rgba(0,0,0,.45);
   --sky:linear-gradient(transparent,transparent);
+  --shade:rgba(16,8,6,.8);
   --enamel:#1A1B1C; --enamel-edge:#0E0F10;
   --rust:#8E4420; --rust-dark:#4A200E; --rust-light:#C9875A;
   --ink:#F4E2CE; --soft:#B8AEA2; --muted:#9E958A; --line:#3A3532;
@@ -49,9 +50,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 
 /* materials */
-.night{background-color:var(--brick);background-image:var(--sky),
-  repeating-linear-gradient(0deg,var(--mortar) 0 2px,transparent 2px 24px),
-  repeating-linear-gradient(90deg,rgba(0,0,0,.38) 0 2px,transparent 2px 56px)}
+/* the wall: red brick drawn for the app (img/brick.png), darkened by the time of day */
+.night{background-color:var(--brick);background-image:var(--sky),linear-gradient(var(--shade),var(--shade)),url(/img/brick.png);
+  background-size:auto,auto,240px 180px}
 .enamel{background-color:var(--enamel);background-image:
   linear-gradient(170deg,rgba(255,255,255,.04),transparent 40%,rgba(0,0,0,.3)),
   radial-gradient(ellipse 90px 26px at 96% 94%,rgba(150,70,28,.85),transparent 70%),
