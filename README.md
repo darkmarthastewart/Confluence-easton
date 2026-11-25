@@ -10,7 +10,7 @@ There is no build step. Netlify publishes the `site/` folder as is.
 
 ## Artwork rule
 
-**Never use any graphic as is, and never promote one.** Licensed packs (like CinCin) and other reference material can inspire the app's art, but their drawings don't go in as they are: not cropped, traced, recolored, masked or lit up as neon. They're also never featured, credited as the app's art or shown off in its marketing. What ships is drawn new for this app.
+**Never use any graphic as is, and never promote one.** Licensed packs (like CinCin) and other reference material can inspire the app's art, but their drawings don't go in as they are: not cropped, traced, recolored, masked or lit up as neon. They're also never featured, credited as the app's art or shown off in its marketing. What ships is drawn new for this app. The exception is finished art the owner supplies for the app themselves, like the brick wall photo, which goes in as given.
 
 ## Put it online (Netlify)
 
@@ -106,6 +106,6 @@ Guide notes stay plain on purpose: they say what to do at a stop, never claim an
 
 ## The look
 
-The app is the Easton Supper Club's flyers taped to a red brick wall (`site/img/brick.png`, drawn in code for the app and darkened by the time of day) under neon, with the Confluence Easton oval logo (`site/img/logo.png`, a small copy in `logo-small.png`) as the sign: it glows red after dark and sits flat with a shadow by day. Content sits on torn paper scraps (cream, wine, navy and lined paper) with a strip of tape, in the supper club's fonts: Grandstander for headings (standing in for More Sugar) and Covered By Your Grace for text. The sign at the top of Today is CONFLUENCE in the supper club's letters, lit as red neon after dark and outlined red by day. Text on paper uses the supper club's inks; neon only glows on the brick. The paper layer is at the end of `site/assets/base.css`; the app's version is at the end of `site/assets/app.css`.
+The app is the Easton Supper Club's flyers taped to a red brick wall (`site/img/brick.jpg`, a photo supplied by the owner, pinned in place so everything scrolls over it, and darkened by the time of day) under neon, with the Confluence Easton oval logo (`site/img/logo.png`, a small copy in `logo-small.png`) as the sign: it glows red after dark and sits flat with a shadow by day. Content sits on torn paper scraps (cream, wine, navy and lined paper) with a strip of tape, in the supper club's fonts: Grandstander for headings (standing in for More Sugar) and Covered By Your Grace for text. The sign at the top of Today is CONFLUENCE in the supper club's letters, lit as red neon after dark and outlined red by day. Text on paper uses the supper club's inks; neon only glows on the brick. The paper layer is at the end of `site/assets/base.css`; the app's version is at the end of `site/assets/app.css`.
 
 Dark Martha Stewart's brand shows up in the look, never as extra copy: the ballpoint ink trail (`site/assets/ballpoint.js`, the same one as marthathinkstoomuch.com), her lime for saved things, the research assistant drawn in chalk on the Day & Night screen, and a small hexagon maker's mark. Permanent Marker is under the Apache License 2.0.

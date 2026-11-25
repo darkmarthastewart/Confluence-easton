@@ -50,9 +50,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
 
 /* materials */
-/* the wall: red brick drawn for the app (img/brick.png), darkened by the time of day */
-.night{background-color:var(--brick);background-image:var(--sky),linear-gradient(var(--shade),var(--shade)),url(/img/brick.png);
-  background-size:auto,auto,240px 180px}
+/* the wall: the brick photo (img/brick.jpg), pinned to the screen so everything scrolls over it,
+   darkened by the time of day */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:var(--sky),linear-gradient(var(--shade),var(--shade)),url(/img/brick.jpg) center/cover no-repeat,var(--brick)}
+.night{background:transparent}
 .enamel{background-color:var(--enamel);background-image:
   linear-gradient(170deg,rgba(255,255,255,.04),transparent 40%,rgba(0,0,0,.3)),
   radial-gradient(ellipse 90px 26px at 96% 94%,rgba(150,70,28,.85),transparent 70%),
