@@ -142,3 +142,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 :root .plaque.dead{background:#D9D2C8;color:#8A817C!important}
 .wordmark .script{font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:.01em;color:#FF6B6B;-webkit-text-stroke:1px #FFE3E3;text-shadow:0 0 4px #FF2A3A,0 0 12px #D8201C}
 .wordmark .caps{font-weight:700}
+/* the logo: the oval sign. After dark it glows like a lit sign on the brick */
+.wordmark-logo{display:block;height:36px;width:auto;filter:drop-shadow(0 0 3px rgba(216,32,28,.9)) drop-shadow(0 0 10px rgba(216,32,28,.55))}
+html[data-phase="day"] .wordmark-logo{filter:drop-shadow(2px 3px 0 rgba(0,0,0,.35))}
+.top .wordmark-logo,.page > .wordmark .wordmark-logo{height:46px}

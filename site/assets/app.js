@@ -227,13 +227,13 @@
   // A real photo of an Easton sign goes here (settings.json "heroPhoto"); until then, just the neon script.
   let heroPhoto = null;
   function heroSign() {
-    const script = `<div class="hero-script glow-pink" aria-hidden="true">Confluence</div>`;
+    const script = `<img class="hero-logo" src="/img/logo.png" alt="Confluence Easton" width="1200" height="361">`;
     const ta = TO.artist && TO.artist.art && TO.artist.art.banner ? TO.artist : null;
     if (ta) { const who = artists.find(x => x.id === ta.artist); return `<figure class="hero has-photo"><div class="photo"><img src="${esc(ta.art.banner)}" alt="${esc(ta.art.alt || 'Artwork by ' + (who ? who.name : 'this month\'s artist'))}">
       <figcaption>Takeover by ${esc(who ? who.name : 'this month\'s artist')}</figcaption></div>${script}</figure>`; }
     if (heroPhoto) return `<figure class="hero has-photo" style="margin-bottom:0"><div class="photo"><img src="${esc(heroPhoto.src)}" alt="${esc(heroPhoto.alt || 'A sign in downtown Easton')}">
       ${heroPhoto.credit ? `<figcaption>${esc(heroPhoto.credit)}</figcaption>` : ''}</div>${script}</figure>`;
-    return `<div class="hero">${script}<div class="hero-place caps">Easton · Pennsylvania</div></div>`;
+    return `<div class="hero">${script}</div>`;
   }
 
   /* ---------- rows & cards ---------- */
