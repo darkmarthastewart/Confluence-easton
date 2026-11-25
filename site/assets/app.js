@@ -10,7 +10,7 @@
   // each kind of place glows its own color on plaques and map pins
   const TYPES = {
     landmark: { label: 'Landmarks', glow: 'yellow', pin: '#FFE7A0' },
-    food: { label: 'Food & drink', glow: 'pink', pin: '#FF5C9A' },
+    food: { label: 'Food & drink', glow: 'pink', pin: '#D93A30' },
     shop: { label: 'Shops', glow: 'yellow', pin: '#FFC93C' },
     creative: { label: 'Creative', glow: 'teal', pin: '#3FE0CF' },
     outdoors: { label: 'Outdoors', glow: 'teal', pin: '#7FF5E6' },
@@ -169,7 +169,7 @@
     const up = m >= sun.rise && m <= sun.set, t = up ? (m - sun.rise) / (sun.set - sun.rise) : 0;
     const x = (10 + 130 * t).toFixed(1), y = (70 - 232 * t * (1 - t)).toFixed(1);
     const body = up ? `<circle cx="${x}" cy="${y}" r="8" fill="#FFE7A0" style="filter:drop-shadow(0 0 6px #FF9F1A)"/>`
-      : `<path d="M82 20 a13 13 0 1 0 13 17 a10 10 0 0 1 -13 -17 Z" fill="#E9E2D6" style="filter:drop-shadow(0 0 5px #9FB4FF)"/>`;
+      : `<path d="M82 20 a13 13 0 1 0 13 17 a10 10 0 0 1 -13 -17 Z" fill="#F4E2CE" style="filter:drop-shadow(0 0 5px #9FB4FF)"/>`;
     const next = up ? `Sunset at ${fmt(sun.set)}` : m < sun.rise ? `Sun's up at ${fmt(sun.rise)}` : `Sun's up tomorrow at ${fmt(sunTimes(addDays(NOW.ymd, 1)).rise)}`;
     const more = [weather && weather.hi != null ? `High ${weather.hi}°` : '', weather && weather.lo != null ? `low ${weather.lo}°` : '', weather && weather.rain != null ? `${weather.rain}% chance of rain` : ''].filter(Boolean).join(' · ');
     const w = weather ? `<div class="temp">${weather.temp}°</div><div class="cond">${esc(weather.cond)}</div>${more ? `<div class="more">${more}</div>` : ''}`
@@ -455,8 +455,8 @@
     if (route) {
       const pts = route.stops.map(s => P[s.place]).filter(p => p && p.lat != null);
       const ll = pts.map(p => [p.lat, p.lng]);
-      L.polyline(ll, { color: '#FF4F8F', weight: 9, opacity: .3 }).addTo(layer);
-      L.polyline(ll, { color: '#FFD6E4', weight: 3, className: 'neon-route' }).addTo(layer);
+      L.polyline(ll, { color: '#C42020', weight: 9, opacity: .3 }).addTo(layer);
+      L.polyline(ll, { color: '#F4E2CE', weight: 3, className: 'neon-route' }).addTo(layer);
       pts.forEach((p, i) => L.marker([p.lat, p.lng], {
         icon: L.divIcon({ className: '', html: `<div class="pin-num">${i + 1}</div>`, iconSize: [30, 30], iconAnchor: [15, 15] }), title: p.name
       }).on('click', () => { S.sel = p.id; renderMap(); }).addTo(layer));
@@ -548,7 +548,7 @@
             <pattern id="wStars" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="url(#wSky)"/><circle cx="4" cy="5" r=".9" fill="#FFF4CF"/><circle cx="13" cy="12" r=".6" fill="#FFF4CF"/></pattern>
             <linearGradient id="wCandle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD25A"/><stop offset=".3" stop-color="#E7E2D8"/><stop offset="1" stop-color="#6E6A62"/></linearGradient>
             <linearGradient id="wSunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB45A"/><stop offset=".6" stop-color="#E0564F"/><stop offset="1" stop-color="#6A2850"/></linearGradient>
-            <pattern id="wMarket" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#3D7A4A"/><rect width="8" height="16" fill="#E9E2D6"/></pattern>
+            <pattern id="wMarket" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#3D7A4A"/><rect width="8" height="16" fill="#F4E2CE"/></pattern>
             <filter id="wRough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="d"/><feTurbulence type="fractalNoise" baseFrequency=".35" numOctaves="4" seed="9" result="r"/><feColorMatrix in="r" type="matrix" values="0 0 0 0 .55  0 0 0 0 .2  0 0 0 0 .06  0 0 0 -2.4 1.3" result="spots"/><feComposite in="spots" in2="d" operator="in" result="rs"/><feMerge><feMergeNode in="d"/><feMergeNode in="rs"/></feMerge></filter>
           </defs>
           <g font-family="Bebas Neue, Impact, sans-serif" font-size="150" stroke="#4A200E" stroke-width="5" paint-order="stroke" filter="url(#wRough)">
