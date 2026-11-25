@@ -327,3 +327,12 @@ html[data-phase="dawn"] .hero-logo,html[data-phase="golden"] .hero-logo{filter:d
 html[data-phase="day"] .hero-logo{filter:drop-shadow(4px 6px 0 rgba(0,0,0,.35))}
 .hero.has-photo .hero-logo{position:relative;z-index:1;margin-top:-40px;width:min(88%,380px)}
 
+/* Covered By Your Grace runs small, so the small lines go up a size */
+body{font-size:20px}
+.row-sub{font-size:16px}
+.subtitle{font-size:18px}
+.lede{font-size:19px}
+.timeline p{font-size:17px}
+.notice{font-size:17px}
+.meta{font-size:19px}
+.time small{font-size:14px}

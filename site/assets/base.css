@@ -7,7 +7,7 @@
 @font-face{font-family:"Permanent Marker";src:url(fonts/permanent-marker-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Grandstander";src:url(fonts/grandstander-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:"Grandstander";src:url(fonts/grandstander-latin-900-normal.woff2) format("woff2");font-weight:800 900;font-display:swap}
-@font-face{font-family:"Patrick Hand";src:url(fonts/patrick-hand-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Covered By Your Grace";src:url(fonts/covered-by-your-grace-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-600-normal.woff2) format("woff2");font-weight:500 600;font-display:swap}
 @font-face{font-family:"Barlow Condensed";src:url(fonts/barlow-condensed-latin-700-normal.woff2) format("woff2");font-weight:700 800;font-display:swap}
@@ -26,9 +26,9 @@
   /* Dark Martha Stewart's own kit, spoken softly: her lime, her marker red */
   --lime:#E4FFB0; --lime-glow:#8DC21F; --marker:#FF3B4E;
   --f-marker:"Permanent Marker", "Marker Felt", "Comic Sans MS", cursive;
-  /* the supper club's type: Grandstander stands in for More Sugar, Patrick Hand for FF Providence Sans */
+  /* headings: Grandstander, standing in for More Sugar until its file arrives; text: Covered By Your Grace */
   --head:"Grandstander", "Arial Rounded MT Bold", "Comic Sans MS", sans-serif;
-  --hand:"Patrick Hand", "Comic Sans MS", "Marker Felt", cursive;
+  --hand:"Covered By Your Grace", "Comic Sans MS", "Marker Felt", cursive;
   --script:var(--head);
   --block:var(--head);
   --caps:var(--head);
