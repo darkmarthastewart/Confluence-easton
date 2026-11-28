@@ -536,30 +536,12 @@
     const el = document.createElement('section');
     el.className = 'welcome'; el.id = 'welcome'; el.setAttribute('aria-label', 'Welcome to Confluence Easton');
     el.innerHTML = `
-      <div class="forks">AT THE FORKS OF THE DELAWARE</div>
-      <div class="greet glow-pink">Greetings <span class="dead">f</span><span class="flicker2">r</span>om</div>
-      <div class="letters">
-        <span class="streak" style="left:13%;top:85%;height:54px"></span><span class="streak" style="left:43%;top:86%;height:34px"></span><span class="streak" style="left:58%;top:85%;height:70px"></span><span class="streak" style="left:85%;top:86%;height:40px"></span>
-        <svg viewBox="0 0 390 200" role="img" aria-label="EASTON, each letter a window onto a scene of downtown">
-          <defs>
-            <linearGradient id="wRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6A35C"/><stop offset=".45" stop-color="#C85A6A"/><stop offset=".55" stop-color="#2E6C78"/><stop offset="1" stop-color="#173E48"/></linearGradient>
-            <pattern id="wBrick" width="20" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#9C3E2A"/><path d="M0 9.5h20M10 0v5M0 5h20" stroke="#5A2216" stroke-width="1"/></pattern>
-            <radialGradient id="wSky" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#3B4C8A"/><stop offset="1" stop-color="#121A33"/></radialGradient>
-            <pattern id="wStars" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="url(#wSky)"/><circle cx="4" cy="5" r=".9" fill="#FFF4CF"/><circle cx="13" cy="12" r=".6" fill="#FFF4CF"/></pattern>
-            <linearGradient id="wCandle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD25A"/><stop offset=".3" stop-color="#E7E2D8"/><stop offset="1" stop-color="#6E6A62"/></linearGradient>
-            <linearGradient id="wSunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB45A"/><stop offset=".6" stop-color="#E0564F"/><stop offset="1" stop-color="#6A2850"/></linearGradient>
-            <pattern id="wMarket" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#3D7A4A"/><rect width="8" height="16" fill="#F4E2CE"/></pattern>
-            <filter id="wRough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" result="d"/><feTurbulence type="fractalNoise" baseFrequency=".35" numOctaves="4" seed="9" result="r"/><feColorMatrix in="r" type="matrix" values="0 0 0 0 .55  0 0 0 0 .2  0 0 0 0 .06  0 0 0 -2.4 1.3" result="spots"/><feComposite in="spots" in2="d" operator="in" result="rs"/><feMerge><feMergeNode in="d"/><feMergeNode in="rs"/></feMerge></filter>
-          </defs>
-          <g font-family="Bebas Neue, Impact, sans-serif" font-size="150" stroke="#4A200E" stroke-width="5" paint-order="stroke" filter="url(#wRough)">
-            <text x="6" y="176" fill="url(#wRiver)">E</text><text x="64" y="176" fill="url(#wBrick)">A</text><text x="131" y="176" fill="url(#wStars)">S</text>
-            <text x="192" y="176" fill="url(#wCandle)">T</text><text x="250" y="176" fill="url(#wSunset)">O</text><text x="317" y="176" fill="url(#wMarket)">N</text>
-          </g>
-        </svg>
+      <div class="wel-main">
+        <img class="wel-logo" src="/img/logo.png" alt="Confluence Easton" width="1200" height="361">
+        <div class="motto">Where the city comes together.</div>
+        <div class="wel-where">Downtown Easton, PA</div>
+        <button class="tube-btn" type="button" id="comein">Come on in</button>
       </div>
-      <div class="state glow-yellow">PENN<span class="dead">S</span>YLV<span class="flicker">A</span>NIA</div>
-      <div class="motto">Where the city comes together.</div>
-      <button class="tube-btn" type="button" id="comein">Come on in</button>
       <div class="foot">EVENTS · PLACES · CREATIVES · ARTISTS</div>`;
     document.querySelector('.app').appendChild(el);
     $('#comein').focus({ preventScroll: true });
